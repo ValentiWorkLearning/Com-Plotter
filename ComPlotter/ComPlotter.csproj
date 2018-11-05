@@ -72,6 +72,10 @@
     <Compile Include="ComPlotControl.xaml.cs">
       <DependentUpon>ComPlotControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="sc_iserial_controller.cs" />
+    <Compile Include="sc_isettings_controller.cs" />
+    <Compile Include="sc_serial_controller.cs" />
+    <Compile Include="sc_settings_controller.cs" />
     <Compile Include="SettingsUserControl.xaml.cs">
       <DependentUpon>SettingsUserControl.xaml</DependentUpon>
     </Compile>
@@ -128,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\file_settings_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\project_settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

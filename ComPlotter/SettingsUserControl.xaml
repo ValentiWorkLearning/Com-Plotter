@@ -8,9 +8,9 @@
              d:DesignHeight="450" d:DesignWidth="905">
     <Grid Background="White" >
         <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid x:Name="SerialMenu" Height="320" Width="220" Background="CornflowerBlue" Margin="10">
+            <Grid x:Name="SerialMenu" Height="320" Width="240" Background="Beige" Margin="10">
 
-                <Grid Height="40" VerticalAlignment="Top" Background="Beige">
+                <Grid Height="40" VerticalAlignment="Top" Background="#439889">
                     <Image  Grid.ColumnSpan="2" Height="50" Width="80" Source="pack://application:,,,/Resources/Icons/serial_port_setup.png" VerticalAlignment="Center"/>
                 </Grid>
 
@@ -35,53 +35,52 @@
                     <TextBlock Text="Stop bits" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
                     <TextBlock Text="Parity" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
 
-                    <ComboBox Name="phonesList"  Grid.Column="1" Grid.Row="0" >
-                        <TextBlock>LG Nexus 5X</TextBlock>
-                        <TextBlock>Huawai Nexus 6P</TextBlock>
-                        <TextBlock>iPhone 6S</TextBlock>
-                        <TextBlock>iPhone 6S Plus</TextBlock>
-                        <TextBlock>Microsoft Lumia 950</TextBlock>
+                    <ComboBox Name="ComName"  Grid.Column="1" Grid.Row="0" SelectedValue="{ Binding SerialName }" >
+                        <ComboBoxItem>LG Nexus 5X</ComboBoxItem>
+                        <ComboBoxItem>Nexus 5X</ComboBoxItem>
                     </ComboBox>
 
-                    <ComboBox Name="BaudrateList"  Grid.Column="1" Grid.Row="1" >
-                        <TextBlock>9600</TextBlock>
-                        <TextBlock>14400</TextBlock>
-                        <TextBlock>19200</TextBlock>
-                        <TextBlock>38400</TextBlock>
-                        <TextBlock>57600</TextBlock>
-                        <TextBlock>115200</TextBlock>
+                    <ComboBox Name="BaudrateList"  Grid.Column="1" Grid.Row="1">
+                        <ComboBoxItem>9600</ComboBoxItem>
+                        <ComboBoxItem>14400</ComboBoxItem>
+                        <ComboBoxItem>19200</ComboBoxItem>
+                        <ComboBoxItem>38400</ComboBoxItem>
+                        <ComboBoxItem>57600</ComboBoxItem>
+                        <ComboBoxItem>115200</ComboBoxItem>
                     </ComboBox>
                     <ComboBox Name="StopBitsList"  Grid.Column="1" Grid.Row="2" >
-                        <TextBlock>1</TextBlock>
-                        <TextBlock>2</TextBlock>
+                        <ComboBoxItem>1</ComboBoxItem>
+                        <ComboBoxItem>2</ComboBoxItem>
                     </ComboBox>
                     <ComboBox Name="ParityList"  Grid.Column="1" Grid.Row="3" >
-                        <TextBlock>Enable</TextBlock>
-                        <TextBlock>Disable</TextBlock>
+                        <ComboBoxItem>Enable</ComboBoxItem>
+                        <ComboBoxItem>Disable</ComboBoxItem>
                     </ComboBox>
-                    <Button Grid.Column="0" Grid.Row="4" Content="Apply" />
-                    <Button Grid.Column="1" Grid.Row="4" Content="Connect" />
-                    <Button Grid.Column="1" Grid.Row="5" Content="Disconnect"/>
-                    <Button Grid.Column="0" Grid.Row="5" Content="Refresh"/>
+                    <Button Grid.Column="0" Grid.Row="4" Content="Apply" Click="Button_ApplyClick" Margin="5,5,5,5" />
+                    <Button Grid.Column="1" Grid.Row="4" Content="Connect" Click="Button_ConnectClick" Margin="5,5,5,5"/>
+                    <Button Grid.Column="1" Grid.Row="5" Content="Disconnect" Click="Button_DisconnectClick" Margin="5,5,5,5"/>
+                    <Button Grid.Column="0" Grid.Row="5" Content="Refresh"  Click="Button_RefreshClick" Margin="5,5,5,5"/>
                 </Grid>
             </Grid>
 
-            <Grid x:Name="FileMenu" Height="175" Width="220" Background="CornflowerBlue" Margin="10" VerticalAlignment="Top">
+            <Grid x:Name="FileMenu" Height="175" Width="240" Background="Beige" Margin="10" VerticalAlignment="Top">
 
-                <Grid Height="40" VerticalAlignment="Top" Background="Beige">
+                <Grid Height="40" VerticalAlignment="Top" Background="#439889">
                     <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Icons/file_settings_icon.png" VerticalAlignment="Center" />
                 </Grid>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,10,10">
-                    <TextBox AcceptsReturn="True" Height="27" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <TextBox AcceptsReturn="True" Height="27" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="186">
                         Enter the file name
                     </TextBox>
-                    <Button Grid.Column="1" Grid.Row="1" Content="Apply" />
+                    <Button Grid.Column="1" Grid.Row="1" Content="Apply" Margin="10,10,10,10" />
                 </StackPanel>
             </Grid>
 
-            <!--<Grid Height="320" Width="220" Background="CornflowerBlue" Margin="10">
-
-            </Grid>-->
+            <Grid Height="320" Width="220" Background="Beige" Margin="10">
+                <Grid Height="40" VerticalAlignment="Top" Background="#439889">
+                    <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Icons/project_settings.png" VerticalAlignment="Center" />
+                </Grid>
+            </Grid>
 
         </StackPanel>
     </Grid>

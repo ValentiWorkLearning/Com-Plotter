@@ -24,5 +24,37 @@ namespace ComPlotter
         {
             InitializeComponent();
         }
+
+        private static ISettingsController m_settingController = new SettingsController();
+
+        private void Button_ApplyClick(object sender, RoutedEventArgs e)
+        {
+            m_settingController.ConfigureSerial(
+                    SerialName
+                ,   SerialBaudrate
+                ,   SerialStopBits
+                ,   SerialParity
+            );
+        }
+
+        private void Button_ConnectClick(object sender, RoutedEventArgs e)
+        {
+            m_settingController.ConnectToSerial();
+        }
+
+        private void Button_DisconnectClick(object sender, RoutedEventArgs e)
+        {
+            m_settingController.DisconnectFromSerial();
+        }
+
+        private void Button_RefreshClick(object sender, RoutedEventArgs e)
+        {
+            m_settingController.RefreshSerialState();
+        }
+
+        public string SerialName { get; set; }
+        public string SerialBaudrate { get; set; }
+        public string SerialParity { get; set; }
+        public string SerialStopBits { get; set; }
     }
 }
