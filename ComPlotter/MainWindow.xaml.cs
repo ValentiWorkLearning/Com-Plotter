@@ -58,9 +58,9 @@ namespace ComPlotter
                     usc = new SettingsUserControl();
                     BodyArea.Children.Add(usc);
                     break;
-                case "ItemCreate":
-               //     usc = new UserControlCreate();
-               //     GridMain.Children.Add(usc);
+                case "ItemChart":
+                    usc = new ComPlotControl();
+                    BodyArea.Children.Add(usc);
                     break;
                 default:
                     break;
