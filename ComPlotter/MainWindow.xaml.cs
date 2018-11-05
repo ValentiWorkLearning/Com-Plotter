@@ -50,13 +50,13 @@ namespace ComPlotter
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UserControl usc = null;
-            GridMain.Children.Clear();
+            BodyArea.Children.Clear();
 
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
             {
-                case "ItemHome":
-               //     usc = new UserControlHome();
-               //     GridMain.Children.Add(usc);
+                case "ItemSettings":
+                    usc = new SettingsUserControl();
+                    BodyArea.Children.Add(usc);
                     break;
                 case "ItemCreate":
                //     usc = new UserControlCreate();

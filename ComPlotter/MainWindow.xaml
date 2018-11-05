@@ -31,7 +31,7 @@
     </Window.Triggers>
 
     <Grid x:Name="GridMain">
-        <Grid Height="60" VerticalAlignment="Top" Background="#00796b">
+        <Grid x:Name="Head" Height="50" VerticalAlignment="Top" Background="#00796b">
 
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
@@ -46,7 +46,9 @@
                 </StackPanel>
             </materialDesign:PopupBox>
         </Grid>
-        <Grid x:Name="GridMenu" Width="55" HorizontalAlignment="Left" Background="#003d33">
+        <Grid x:Name="BodyArea" Margin="80,60,10,10" Background="Aqua">
+        </Grid>
+        <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#003d33">
 
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
@@ -84,7 +86,7 @@
                             <TextBlock Text="Chart" VerticalAlignment="Center" Margin="20 10" FontSize="18"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemComSettings" Height="60">
+                    <ListViewItem x:Name="ItemSettings" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Settings" Height="25" Width="25" Margin="10"/>
                             <TextBlock Text="Settings" VerticalAlignment="Center" Margin="20 10" FontSize="18"/>
