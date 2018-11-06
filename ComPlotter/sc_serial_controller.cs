@@ -28,6 +28,7 @@ namespace ComPlotter
             if (!m_serial.IsOpen)
             {
                 m_serial.Open();
+
                 if (m_isFirstLaunch)
                 {
                     m_readerThread.Start();
@@ -98,6 +99,11 @@ namespace ComPlotter
             }
         }
 
+        void IDisposable.Dispose()
+        {
+            this.Disconnect();
+            GC.SuppressFinalize(this);
+        }
 
         Thread m_readerThread;
 

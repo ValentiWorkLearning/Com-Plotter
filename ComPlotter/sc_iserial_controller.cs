@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComPlotter
 {
-    interface ISerialController
+    interface ISerialController : IDisposable
     {
         void Connect();
 

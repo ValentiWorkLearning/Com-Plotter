@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComPlotter
 {
-    interface ISettingsController
+    interface ISettingsController:IDisposable
     {
         void ConfigureSerial(
                 string _serialName

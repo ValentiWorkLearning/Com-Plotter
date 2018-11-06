@@ -36,6 +36,11 @@ namespace ComPlotter
             m_serialController.RefreshState();
         }
 
+        public void Dispose()
+        {
+            m_serialController.Dispose();
+        }
+
         ISerialController m_serialController;
     }
 }

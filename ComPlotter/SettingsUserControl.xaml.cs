@@ -54,7 +54,7 @@ namespace ComPlotter
 
         public string SerialName { get; set; }
         public string SerialBaudrate { get; set; }
-        public string SerialParity { get; set; }
         public string SerialStopBits { get; set; }
+        public string SerialParity { get; set; }
     }
 }
