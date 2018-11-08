@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Threading;
+using System.Collections.Concurrent;
 
 namespace ComPlotter
 {
@@ -12,47 +13,47 @@ namespace ComPlotter
     {
         public SerialController()
         {
-            m_serial = new SerialPort
+            m_serialPort = new SerialPort
             {
                 ReadTimeout = 500,
                 WriteTimeout = 500
             };
 
-            m_readerThread = new Thread(Read);
-            m_mutex = new Mutex();
-            m_isFirstLaunch = true;
+            m_readerThread = new Thread(ReadTask);
+            m_threadGuard = new Mutex();
+            m_isFirstThreadLaunch = true;
         }
 
         public void Connect()
         {
-            if (!m_serial.IsOpen)
+            if (!m_serialPort.IsOpen)
             {
-                m_serial.Open();
+                m_serialPort.Open();
 
-                if (m_isFirstLaunch)
+                if (m_isFirstThreadLaunch)
                 {
                     m_readerThread.Start();
-                    m_isFirstLaunch = false;
+                    m_isFirstThreadLaunch = false;
                 }
                 else
                 {
-                    m_mutex.ReleaseMutex();
+                    m_threadGuard.ReleaseMutex();
                 }
             }
         }
 
         public void Disconnect()
         {
-            if ( m_serial.IsOpen )
+            if (m_serialPort.IsOpen )
             {
-                m_mutex.WaitOne();
-                m_serial.Close();
+                m_threadGuard.WaitOne();
+                m_serialPort.Close();
             }
         }
 
         public void RefreshState()
         {
-            if ( m_serial.IsOpen )
+            if (m_serialPort.IsOpen )
                 this.Disconnect();
 
             this.Connect();
@@ -60,60 +61,62 @@ namespace ComPlotter
 
         public void SetBaudrate(string _baudrate)
         {
-            m_serial.BaudRate = int.Parse(_baudrate);
+            m_serialPort.BaudRate = int.Parse(_baudrate);
         }
 
         public void SetName(string _name)
         {
-            m_serial.PortName = _name;
+            m_serialPort.PortName = _name;
         }
 
         public void SetParity(string _parity)
         {
-            m_serial.Parity = (Parity)Enum.Parse(typeof(Parity), _parity, true);
+            m_serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), _parity, true);
         }
 
         public void SetStopBits(string _bits)
         {
-            m_serial.StopBits = (StopBits)Enum.Parse(typeof(StopBits), _bits, true);
+            m_serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), _bits, true);
         }
 
-        private void Read()
+        private void ReadTask()
         {
             while (true)
             {
                 try
                 {
-                    m_mutex.WaitOne();
+                    m_threadGuard.WaitOne();
 
-                    string message = m_serial.ReadLine();
+                    m_data.Enqueue( (byte)m_serialPort.ReadByte() );
 
-                    m_mutex.ReleaseMutex();
+                    m_threadGuard.ReleaseMutex();
 
-                    Console.WriteLine(message);
                 }
                 catch (System.TimeoutException)
                 {
-                    m_mutex.ReleaseMutex();
+                    m_threadGuard.ReleaseMutex();
                 }
             }
         }
 
         void IDisposable.Dispose()
         {
-            m_mutex.WaitOne();
+            m_threadGuard.WaitOne();
             m_readerThread.Abort();
-            m_serial.Close();
+            m_serialPort.Close();
+
             GC.SuppressFinalize(this);
         }
 
+        ConcurrentQueue<byte> m_data;
+
+        bool m_isFirstThreadLaunch;
+
         Thread m_readerThread;
 
-        Mutex m_mutex;
+        Mutex m_threadGuard;
 
-        bool m_isFirstLaunch;
-
-        SerialPort m_serial;
+        SerialPort m_serialPort;
 
     }
 }
