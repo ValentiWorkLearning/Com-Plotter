@@ -27,7 +27,7 @@ namespace ComPlotter
 
         private void ButtonPopUpQuit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void ButtonPopUpAbout_Click(object sender, RoutedEventArgs e)

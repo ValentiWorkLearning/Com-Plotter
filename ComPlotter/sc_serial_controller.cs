@@ -101,7 +101,9 @@ namespace ComPlotter
 
         void IDisposable.Dispose()
         {
-            this.Disconnect();
+            m_mutex.WaitOne();
+            m_readerThread.Abort();
+            m_serial.Close();
             GC.SuppressFinalize(this);
         }
 

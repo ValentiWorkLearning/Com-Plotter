@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ComPlotter
 {
@@ -11,6 +12,12 @@ namespace ComPlotter
         public SettingsController()
         {
             m_serialController = new SerialController();
+            Application.Current.Exit += new ExitEventHandler(Application_ApplicationExit);
+        }
+
+        private void Application_ApplicationExit(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
 
         public void ConfigureSerial(string _serialName, string _baudrate, string _stopBits, string _parity)
