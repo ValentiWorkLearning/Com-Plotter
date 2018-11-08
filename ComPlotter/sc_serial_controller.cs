@@ -21,6 +21,7 @@ namespace ComPlotter
 
             m_readerThread = new Thread(ReadTask);
             m_threadGuard = new Mutex();
+            m_data = new ConcurrentQueue<byte>();
             m_isFirstThreadLaunch = true;
         }
 
