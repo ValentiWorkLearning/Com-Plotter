@@ -17,6 +17,8 @@ using LiveCharts;
 using LiveCharts.Wpf;
 
 using System.Windows.Threading;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace ComPlotter
 {
@@ -46,8 +48,12 @@ namespace ComPlotter
         private void timer_Tick(object sender, EventArgs e)
         {
             Random random = new Random();
-            m_chartValues.Add(random.Next(0,100));
-            m_chartValues.RemoveAt(0);
+            m_chartValues.Add(random.Next(0,10));
+            if (m_chartValues.Count > 100)
+            {
+                m_chartValues.RemoveAt(0);
+
+            }
          }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -57,10 +63,8 @@ namespace ComPlotter
             m_chartValues[3] = 4;
         }
 
-        private void M_series_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // throw new NotImplementedException();
-
             Console.WriteLine("Hello");
         }
 

@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Threading;
-using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace ComPlotter
 {
@@ -15,13 +16,13 @@ namespace ComPlotter
         {
             m_serialPort = new SerialPort
             {
-                ReadTimeout = 500,
-                WriteTimeout = 500
+                ReadTimeout = 50,
+                WriteTimeout = 50
             };
 
             m_readerThread = new Thread(ReadTask);
             m_threadGuard = new Mutex();
-            SerialData = new ConcurrentQueue<byte>();
+            SerialData = new ObservableCollection<byte>();
             m_isFirstThreadLaunch = true;
         }
 
@@ -70,7 +71,6 @@ namespace ComPlotter
                 this.Disconnect();
 
             this.Connect();
-
         }
 
         public void Configure(
@@ -97,11 +97,11 @@ namespace ComPlotter
 
                     Random testRand = new Random();
 
-                    SerialData.Enqueue( (byte) testRand.Next( 0 , 255 ) );
+                    SerialData.Add( (byte) testRand.Next( 0 , 255 ) );
 
                     byte tempByte = (byte)m_serialPort.ReadByte();
 
-                    SerialData.Enqueue(tempByte);
+                    SerialData.Add(tempByte);
 
                     //Console.WriteLine(m_serialPort.ReadLine());
 
@@ -124,7 +124,7 @@ namespace ComPlotter
             GC.SuppressFinalize(this);
         }
 
-        public ConcurrentQueue<byte> SerialData { get; }
+        public ObservableCollection<byte> SerialData { get; }
 
         public List<string> AvaliableSerials {
             get {

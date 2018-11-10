@@ -12,9 +12,9 @@
             <lvc:CartesianChart ScrollMode="None" Name="DisplayChart" Margin="10,27" HorizontalAlignment="Center" VerticalAlignment="Center" Height="376" Width="721" DisableAnimations="False" 
                                 Hoverable="False">
                 
-                <lvc:CartesianChart.AxisY>
+                <!--<lvc:CartesianChart.AxisY>
                     <lvc:Axis MaxValue="100" ShowLabels="True"></lvc:Axis>
-                </lvc:CartesianChart.AxisY>
+                </lvc:CartesianChart.AxisY>-->
                 
                 <lvc:CartesianChart.Series>
                     <lvc:ColumnSeries Values="{Binding m_chartValues}"

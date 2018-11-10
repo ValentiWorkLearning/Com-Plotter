@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace ComPlotter
 {
@@ -24,6 +26,6 @@ namespace ComPlotter
 
         List<string> AvaliableSerials { get; }
 
-        ConcurrentQueue<byte> SerialData { get; }
+        ObservableCollection<byte> SerialData { get; }
     }
 }

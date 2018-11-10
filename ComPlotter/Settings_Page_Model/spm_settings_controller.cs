@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace ComPlotter
 {
@@ -50,6 +52,16 @@ namespace ComPlotter
         public void Dispose()
         {
             m_serialController.Dispose();
+        }
+
+        private static void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add: // если добавление
+                    Console.WriteLine("Добавлен новый объект: {0}", e.NewItems[0]);
+                    break;
+            }
         }
 
         public ISerialController SerialController { get { return m_serialController; } }
