@@ -16,8 +16,8 @@ namespace ComPlotter
         {
             m_serialPort = new SerialPort
             {
-                ReadTimeout = 50,
-                WriteTimeout = 50
+                ReadTimeout = 500,
+                WriteTimeout = 500
             };
 
             m_readerThread = new Thread(ReadTask);

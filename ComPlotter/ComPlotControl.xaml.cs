@@ -27,7 +27,7 @@ namespace ComPlotter
     /// </summary>
     public partial class ComPlotControl : UserControl
     {
-        public ComPlotControl()
+        public ComPlotControl(ISerialServicesFacade _serialServicesFacade )
         {
             InitializeComponent();
 
@@ -36,7 +36,7 @@ namespace ComPlotter
             m_timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             m_timer.Start();
 
-            m_chartValues = new ChartValues<decimal> { 1,2,3,4,5,6,7,8,9,10 };
+            m_chartValues = new ChartValues<int> { 1,2,3,4,5,6,7,8,9,10 };
 
             DataContext = this;
 
@@ -44,16 +44,21 @@ namespace ComPlotter
 
             DisplayChart.DataTooltip = null;
 
+            SerialServices = _serialServicesFacade;
+
+            SerialServices.SerialController.SerialData.CollectionChanged += CollectionChanged;
+
         }
+
         private void timer_Tick(object sender, EventArgs e)
         {
-            Random random = new Random();
-            m_chartValues.Add(random.Next(0,10));
-            if (m_chartValues.Count > 100)
-            {
-                m_chartValues.RemoveAt(0);
+            //Random random = new Random();
+            //m_chartValues.Add(random.Next(0,10));
+            //if (m_chartValues.Count > 100)
+            //{
+            //    m_chartValues.RemoveAt(0);
 
-            }
+            //}
          }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -65,12 +70,14 @@ namespace ComPlotter
 
         public void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Console.WriteLine("Hello");
+            int toAdd = ((byte)e.NewItems[0]);
+
+            m_chartValues.Add( toAdd );
         }
 
-        public ChartValues<decimal> m_chartValues { get; set; }
+        public ChartValues<int> m_chartValues { get; set; }
 
         DispatcherTimer m_timer;
-
+        ISerialServicesFacade SerialServices;
     }
 }

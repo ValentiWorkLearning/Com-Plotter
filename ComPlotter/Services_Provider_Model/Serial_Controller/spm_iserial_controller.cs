@@ -9,7 +9,7 @@ using System.Collections.Specialized;
 
 namespace ComPlotter
 {
-    interface ISerialController : IDisposable
+    public interface ISerialController : IDisposable
     {
         void Connect();
 

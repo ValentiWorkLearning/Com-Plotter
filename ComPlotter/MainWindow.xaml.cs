@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComPlotter.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace ComPlotter
         public MainWindow()
         {
             InitializeComponent();
+            SerialFacade = new SerialServicesProvider();
+            controlsFactory = new UserControlsFactory();
+            currentControl = new UserControl();
         }
 
         private void ButtonPopUpQuit_Click(object sender, RoutedEventArgs e)
@@ -32,7 +36,6 @@ namespace ComPlotter
 
         private void ButtonPopUpAbout_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -49,22 +52,18 @@ namespace ComPlotter
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            UserControl usc = null;
             BodyArea.Children.Clear();
 
-            switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
-            {
-                case "ItemSettings":
-                    usc = new SettingsUserControl();
-                    BodyArea.Children.Add(usc);
-                    break;
-                case "ItemChart":
-                    usc = new ComPlotControl();
-                    BodyArea.Children.Add(usc);
-                    break;
-                default:
-                    break;
-            }
+            controlsFactory.ArgumentsParser = new WindowTypesParser();
+
+            currentControl = controlsFactory.CreateDialog(sender, SerialFacade);
+
+            BodyArea.Children.Add(currentControl);
+
         }
+
+        ISerialServicesFacade SerialFacade;
+        UserControlsFactory controlsFactory;
+        UserControl currentControl;
     }
 }

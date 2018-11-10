@@ -20,18 +20,18 @@ namespace ComPlotter
     /// </summary>
     public partial class SettingsUserControl : UserControl
     {
-        public SettingsUserControl()
+        public SettingsUserControl( ISerialServicesFacade _serialServicesProvider)
         {
             InitializeComponent();
+
+            SerialServices = _serialServicesProvider;
 
             RestoreInternal();
         }
 
-        private static ISettingsController SettingsController = new SettingsController();
-
         private void Button_ApplyClick(object sender, RoutedEventArgs e)
         {
-            SettingsController.SerialController.Configure(
+            SerialServices.SerialController.Configure(
                     SerialName
                 ,   SerialBaudrate
                 ,   SerialStopBits
@@ -41,17 +41,24 @@ namespace ComPlotter
 
         private void Button_ConnectClick(object sender, RoutedEventArgs e)
         {
-            SettingsController.SerialController.Connect();
+            try
+            {
+                SerialServices.SerialController.Connect();
+            }
+            catch (InvalidOperationException _e)
+            {
+                MessageBox.Show("Error occured when trying to open Serial", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Button_DisconnectClick(object sender, RoutedEventArgs e)
         {
-            SettingsController.SerialController.Disconnect();
+            SerialServices.SerialController.Disconnect();
         }
 
         private void Button_RefreshClick(object sender, RoutedEventArgs e)
         {
-            SettingsController.SerialController.RefreshState();
+            SerialServices.SerialController.RefreshState();
         }
 
         private void ComName_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -103,7 +110,7 @@ namespace ComPlotter
 
             // restore current serial property & view
             ComName.Items.Clear();
-            foreach (string serialName in SettingsController.SerialController.AvaliableSerials)
+            foreach (string serialName in SerialServices.SerialController.AvaliableSerials)
             {
                 ComName.Items.Add(serialName);
             }
@@ -126,6 +133,8 @@ namespace ComPlotter
         string SerialBaudrate;
         string SerialStopBits;
         string SerialParity;
+
+        ISerialServicesFacade SerialServices;
 
     }
 }
