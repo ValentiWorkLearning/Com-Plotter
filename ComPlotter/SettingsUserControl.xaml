@@ -35,12 +35,12 @@
                     <TextBlock Text="Stop bits" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
                     <TextBlock Text="Parity" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
 
-                    <ComboBox Name="ComName"  Grid.Column="1" Grid.Row="0" SelectedValue="{ Binding SerialName }" >
-                        <ComboBoxItem>LG Nexus 5X</ComboBoxItem>
-                        <ComboBoxItem>Nexus 5X</ComboBoxItem>
+                    <ComboBox Name="ComName"  Grid.Column="1" Grid.Row="0" SelectedValuePath="Content" SelectionChanged="ComName_SelectionChanged" >
+                        <ComboBoxItem>COM1</ComboBoxItem>
+                        <ComboBoxItem>COM2</ComboBoxItem>
                     </ComboBox>
 
-                    <ComboBox Name="BaudrateList"  Grid.Column="1" Grid.Row="1">
+                    <ComboBox Name="BaudrateList"  Grid.Column="1" Grid.Row="1" SelectionChanged="BaudrateList_SelectionChanged" SelectedValuePath="Content">
                         <ComboBoxItem>9600</ComboBoxItem>
                         <ComboBoxItem>14400</ComboBoxItem>
                         <ComboBoxItem>19200</ComboBoxItem>
@@ -48,13 +48,16 @@
                         <ComboBoxItem>57600</ComboBoxItem>
                         <ComboBoxItem>115200</ComboBoxItem>
                     </ComboBox>
-                    <ComboBox Name="StopBitsList"  Grid.Column="1" Grid.Row="2" >
+                    <ComboBox Name="StopBitsList"  Grid.Column="1" Grid.Row="2" SelectionChanged="StopBitsList_SelectionChanged" SelectedValuePath="Content">
                         <ComboBoxItem>1</ComboBoxItem>
                         <ComboBoxItem>2</ComboBoxItem>
                     </ComboBox>
-                    <ComboBox Name="ParityList"  Grid.Column="1" Grid.Row="3" >
-                        <ComboBoxItem>Enable</ComboBoxItem>
-                        <ComboBoxItem>Disable</ComboBoxItem>
+                    <ComboBox Name="ParityList"  Grid.Column="1" Grid.Row="3" SelectionChanged="ParityList_SelectionChanged" SelectedValuePath="Content">
+                        <ComboBoxItem>Even</ComboBoxItem>
+                        <ComboBoxItem>Mark</ComboBoxItem>
+                        <ComboBoxItem>None</ComboBoxItem>
+                        <ComboBoxItem>Odd</ComboBoxItem>
+                        <ComboBoxItem>Space</ComboBoxItem>
                     </ComboBox>
                     <Button Grid.Column="0" Grid.Row="4" Content="Apply" Click="Button_ApplyClick" Margin="5,5,5,5" />
                     <Button Grid.Column="1" Grid.Row="4" Content="Connect" Click="Button_ConnectClick" Margin="5,5,5,5"/>

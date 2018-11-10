@@ -30,7 +30,14 @@ namespace ComPlotter
 
         public void ConnectToSerial()
         {
-            m_serialController.Connect();
+            try
+            {
+                m_serialController.Connect();
+            }
+            catch (InvalidOperationException _e)
+            {
+                MessageBox.Show("Error occured when trying to open Serial", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void DisconnectFromSerial()

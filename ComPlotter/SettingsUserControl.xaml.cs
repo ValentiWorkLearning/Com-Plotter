@@ -56,5 +56,29 @@ namespace ComPlotter
         public string SerialBaudrate { get; set; }
         public string SerialStopBits { get; set; }
         public string SerialParity { get; set; }
+
+        private void ComName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem item = ComName.SelectedItem as ComboBoxItem;
+            SerialName = item.Content.ToString();
+        }
+
+        private void BaudrateList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem item = BaudrateList.SelectedItem as ComboBoxItem;
+            SerialBaudrate = item.Content.ToString();
+        }
+
+        private void StopBitsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem item = StopBitsList.SelectedItem as ComboBoxItem;
+            SerialStopBits = item.Content.ToString();
+        }
+
+        private void ParityList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem item = ParityList.SelectedItem as ComboBoxItem;
+            SerialParity = item.Content.ToString();
+        }
     }
 }

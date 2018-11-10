@@ -28,28 +28,28 @@ namespace ComPlotter
         public ComPlotControl()
         {
             InitializeComponent();
+
             m_timer = new DispatcherTimer();
             m_timer.Tick += new EventHandler(timer_Tick);
-            m_timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            m_timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             m_timer.Start();
 
-            m_chartValues = new ChartValues<decimal> { 5, 6, 2, 7, 20, 3, 5, 3, 4 ,5,6,5,64,5,4,4,5,3,2,1,3,4,5,2,4,1,1,43,5,5,4,7,5,3,2,3,4,2,1,23,5,5,5,44,};
+            m_chartValues = new ChartValues<decimal> { 1,2,3,4,5,6,7,8,9,10 };
 
-            m_columnSeries = new ColumnSeries { Values = m_chartValues };
+            DataContext = this;
 
-            m_series = new SeriesCollection { m_columnSeries };
 
-            m_series.CollectionChanged += M_series_CollectionChanged;
-            DisplayChart.AnimationsSpeed = TimeSpan.FromMilliseconds(400);
+            DisplayChart.AnimationsSpeed = TimeSpan.FromMilliseconds(100);
 
-            DisplayChart.Series = m_series;
+            DisplayChart.DataTooltip = null;
+
         }
         private void timer_Tick(object sender, EventArgs e)
         {
-            m_chartValues[0] += 5;
-            m_chartValues[1] += 2;
-            m_chartValues[3] += 4;
-        }
+            Random random = new Random();
+            m_chartValues.Add(random.Next(0,100));
+            m_chartValues.RemoveAt(0);
+         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
@@ -65,12 +65,9 @@ namespace ComPlotter
             Console.WriteLine("Hello");
         }
 
-        ChartValues<decimal> m_chartValues;
-
-        ColumnSeries m_columnSeries;
+        public ChartValues<decimal> m_chartValues { get; set; }
 
         DispatcherTimer m_timer;
 
-        SeriesCollection m_series;
     }
 }

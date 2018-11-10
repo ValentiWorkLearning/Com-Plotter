@@ -29,16 +29,23 @@ namespace ComPlotter
         {
             if (!m_serialPort.IsOpen)
             {
-                m_serialPort.Open();
+                try
+                {
+                    m_serialPort.Open();
 
-                if (m_isFirstThreadLaunch)
-                {
-                    m_readerThread.Start();
-                    m_isFirstThreadLaunch = false;
+                    if (m_isFirstThreadLaunch)
+                    {
+                        m_readerThread.Start();
+                        m_isFirstThreadLaunch = false;
+                    }
+                    else
+                    {
+                        m_threadGuard.ReleaseMutex();
+                    }
                 }
-                else
+                catch (Exception _e)
                 {
-                    m_threadGuard.ReleaseMutex();
+                    throw new InvalidOperationException();
                 }
             }
         }
@@ -88,7 +95,7 @@ namespace ComPlotter
                 {
                     m_threadGuard.WaitOne();
 
-                    m_data.Enqueue( (byte)m_serialPort.ReadByte() );
+                    m_data.Enqueue( (byte) m_serialPort.ReadByte() );
 
                     m_threadGuard.ReleaseMutex();
 
