@@ -8,17 +8,6 @@ namespace ComPlotter
 {
     interface ISettingsController:IDisposable
     {
-        void ConfigureSerial(
-                string _serialName
-            ,   string _baudrate
-            ,   string _stopBits
-            ,   string _parity
-        );
-
-        void ConnectToSerial();
-
-        void RefreshSerialState();
-
-        void DisconnectFromSerial();
+        ISerialController SerialController { get; }
     }
 }

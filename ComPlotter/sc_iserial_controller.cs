@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace ComPlotter
 {
@@ -10,16 +11,19 @@ namespace ComPlotter
     {
         void Connect();
 
-        void SetName( string _name );
-
-        void SetBaudrate(string _baudrate);
-
-        void SetStopBits(string _bits);
-
-        void SetParity(string _parity);
+        void Configure(
+            string _name
+        ,   string _baudrate
+        ,   string _bits
+        ,   string _parity
+        );
 
         void RefreshState();
 
         void Disconnect();
+
+        List<string> AvaliableSerials { get; }
+
+        ConcurrentQueue<byte> SerialData { get; }
     }
 }

@@ -21,19 +21,24 @@ namespace ComPlotter
 
             m_readerThread = new Thread(ReadTask);
             m_threadGuard = new Mutex();
-            m_data = new ConcurrentQueue<byte>();
+            SerialData = new ConcurrentQueue<byte>();
             m_isFirstThreadLaunch = true;
         }
 
         public void Connect()
         {
-            if (!m_serialPort.IsOpen)
+            Console.WriteLine(m_serialPort.BaudRate);
+            Console.WriteLine(m_serialPort.DataBits);
+            Console.WriteLine(m_serialPort.StopBits);
+            Console.WriteLine(m_serialPort.Parity);
+
+            if ( !m_serialPort.IsOpen )
             {
                 try
                 {
                     m_serialPort.Open();
 
-                    if (m_isFirstThreadLaunch)
+                    if ( m_isFirstThreadLaunch )
                     {
                         m_readerThread.Start();
                         m_isFirstThreadLaunch = false;
@@ -52,7 +57,7 @@ namespace ComPlotter
 
         public void Disconnect()
         {
-            if (m_serialPort.IsOpen )
+            if ( m_serialPort.IsOpen )
             {
                 m_threadGuard.WaitOne();
                 m_serialPort.Close();
@@ -61,46 +66,49 @@ namespace ComPlotter
 
         public void RefreshState()
         {
-            if (m_serialPort.IsOpen )
+            if ( m_serialPort.IsOpen )
                 this.Disconnect();
 
             this.Connect();
+
         }
 
-        public void SetBaudrate(string _baudrate)
-        {
-            m_serialPort.BaudRate = int.Parse(_baudrate);
-        }
-
-        public void SetName(string _name)
+        public void Configure(
+                string _name
+            ,   string _baudrate
+            ,   string _bits
+            ,   string _parity
+            )
         {
             m_serialPort.PortName = _name;
-        }
 
-        public void SetParity(string _parity)
-        {
+            m_serialPort.BaudRate = int.Parse(_baudrate);
             m_serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), _parity, true);
-        }
-
-        public void SetStopBits(string _bits)
-        {
             m_serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), _bits, true);
         }
 
         private void ReadTask()
         {
-            while (true)
+            while ( true )
             {
                 try
                 {
                     m_threadGuard.WaitOne();
 
-                    m_data.Enqueue( (byte) m_serialPort.ReadByte() );
+                    Random testRand = new Random();
+
+                    SerialData.Enqueue( (byte) testRand.Next( 0 , 255 ) );
+
+                    byte tempByte = (byte)m_serialPort.ReadByte();
+
+                    SerialData.Enqueue(tempByte);
+
+                    //Console.WriteLine(m_serialPort.ReadLine());
 
                     m_threadGuard.ReleaseMutex();
 
                 }
-                catch (System.TimeoutException)
+                catch ( System.TimeoutException )
                 {
                     m_threadGuard.ReleaseMutex();
                 }
@@ -116,7 +124,13 @@ namespace ComPlotter
             GC.SuppressFinalize(this);
         }
 
-        ConcurrentQueue<byte> m_data;
+        public ConcurrentQueue<byte> SerialData { get; }
+
+        public List<string> AvaliableSerials {
+            get {
+                return SerialPort.GetPortNames().ToList();
+            }
+        }
 
         bool m_isFirstThreadLaunch;
 

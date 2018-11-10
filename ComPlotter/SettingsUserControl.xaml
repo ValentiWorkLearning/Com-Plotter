@@ -35,9 +35,7 @@
                     <TextBlock Text="Stop bits" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
                     <TextBlock Text="Parity" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"></TextBlock>
 
-                    <ComboBox Name="ComName"  Grid.Column="1" Grid.Row="0" SelectedValuePath="Content" SelectionChanged="ComName_SelectionChanged" >
-                        <ComboBoxItem>COM1</ComboBoxItem>
-                        <ComboBoxItem>COM2</ComboBoxItem>
+                    <ComboBox Name="ComName"  Grid.Column="1" Grid.Row="0" SelectionChanged="ComName_SelectionChanged" >
                     </ComboBox>
 
                     <ComboBox Name="BaudrateList"  Grid.Column="1" Grid.Row="1" SelectionChanged="BaudrateList_SelectionChanged" SelectedValuePath="Content">

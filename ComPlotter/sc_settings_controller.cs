@@ -22,10 +22,7 @@ namespace ComPlotter
 
         public void ConfigureSerial(string _serialName, string _baudrate, string _stopBits, string _parity)
         {
-            m_serialController.SetName(_serialName);
-            m_serialController.SetStopBits(_stopBits);
-            m_serialController.SetBaudrate(_baudrate);
-            m_serialController.SetParity(_parity);
+            m_serialController.Configure( _serialName, _baudrate, _stopBits, _parity );
         }
 
         public void ConnectToSerial()
@@ -54,6 +51,8 @@ namespace ComPlotter
         {
             m_serialController.Dispose();
         }
+
+        public ISerialController SerialController { get { return m_serialController; } }
 
         ISerialController m_serialController;
     }

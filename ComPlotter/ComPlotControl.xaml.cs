@@ -38,7 +38,6 @@ namespace ComPlotter
 
             DataContext = this;
 
-
             DisplayChart.AnimationsSpeed = TimeSpan.FromMilliseconds(100);
 
             DisplayChart.DataTooltip = null;

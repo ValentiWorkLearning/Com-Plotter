@@ -23,13 +23,15 @@ namespace ComPlotter
         public SettingsUserControl()
         {
             InitializeComponent();
+
+            RestoreInternal();
         }
 
-        private static ISettingsController m_settingController = new SettingsController();
+        private static ISettingsController SettingsController = new SettingsController();
 
         private void Button_ApplyClick(object sender, RoutedEventArgs e)
         {
-            m_settingController.ConfigureSerial(
+            SettingsController.SerialController.Configure(
                     SerialName
                 ,   SerialBaudrate
                 ,   SerialStopBits
@@ -39,46 +41,91 @@ namespace ComPlotter
 
         private void Button_ConnectClick(object sender, RoutedEventArgs e)
         {
-            m_settingController.ConnectToSerial();
+            SettingsController.SerialController.Connect();
         }
 
         private void Button_DisconnectClick(object sender, RoutedEventArgs e)
         {
-            m_settingController.DisconnectFromSerial();
+            SettingsController.SerialController.Disconnect();
         }
 
         private void Button_RefreshClick(object sender, RoutedEventArgs e)
         {
-            m_settingController.RefreshSerialState();
+            SettingsController.SerialController.RefreshState();
         }
-
-        public string SerialName { get; set; }
-        public string SerialBaudrate { get; set; }
-        public string SerialStopBits { get; set; }
-        public string SerialParity { get; set; }
 
         private void ComName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxItem item = ComName.SelectedItem as ComboBoxItem;
-            SerialName = item.Content.ToString();
+            SerialName = ComName.SelectedItem.ToString();
+
+            Properties.Settings.Default.SelectedSerial = SerialName;
         }
 
         private void BaudrateList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxItem item = BaudrateList.SelectedItem as ComboBoxItem;
-            SerialBaudrate = item.Content.ToString();
+            ConvertSelectionToStringProperty(BaudrateList, ref SerialBaudrate);
+
+            Properties.Settings.Default.SerialBaudRate = BaudrateList.SelectedIndex;
         }
 
         private void StopBitsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxItem item = StopBitsList.SelectedItem as ComboBoxItem;
-            SerialStopBits = item.Content.ToString();
+            ConvertSelectionToStringProperty(StopBitsList , ref SerialStopBits);
+
+            Properties.Settings.Default.SerialStopBits = StopBitsList.SelectedIndex;
         }
 
         private void ParityList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxItem item = ParityList.SelectedItem as ComboBoxItem;
-            SerialParity = item.Content.ToString();
+            ConvertSelectionToStringProperty( ParityList , ref SerialParity );
+
+            Properties.Settings.Default.SerialParity = ParityList.SelectedIndex;
         }
+
+        void ConvertSelectionToStringProperty(ComboBox _selectionList , ref string _property)
+        {
+            ComboBoxItem _item = _selectionList.SelectedItem as ComboBoxItem;
+            _property = _item.Content.ToString();
+        }
+
+        void RestoreInternal()
+        {
+     
+            // restore internal properties
+            SerialBaudrate  =   BaudrateList.Items[ Properties.Settings.Default.SerialBaudRate ].ToString();
+            SerialStopBits  =   StopBitsList.Items[ Properties.Settings.Default.SerialStopBits ].ToString();
+            SerialParity    =   ParityList.Items[ Properties.Settings.Default.SerialParity ].ToString();
+
+            // restore view indexes
+            BaudrateList.SelectedIndex  =   Properties.Settings.Default.SerialBaudRate;
+            StopBitsList.SelectedIndex  =   Properties.Settings.Default.SerialStopBits;
+            ParityList.SelectedIndex    =   Properties.Settings.Default.SerialParity;
+
+            // restore current serial property & view
+            ComName.Items.Clear();
+            foreach (string serialName in SettingsController.SerialController.AvaliableSerials)
+            {
+                ComName.Items.Add(serialName);
+            }
+
+            int selectedIndex = ComName.Items.IndexOf(Properties.Settings.Default.SelectedSerial);
+
+            if (selectedIndex != -1)
+            {
+                ComName.SelectedIndex = selectedIndex;
+                SerialName = ComName.Items[selectedIndex].ToString();
+            }
+            else
+            {
+                SerialName = null;
+            }
+
+        }
+
+        string SerialName;
+        string SerialBaudrate;
+        string SerialStopBits;
+        string SerialParity;
+
     }
 }
