@@ -9,7 +9,7 @@ using System.IO;
 
 namespace ComPlotter
 {
-    abstract class AbstractFileWriter : IDisposable
+    abstract public class AbstractFileWriter : IDisposable
     {
         public void SetFileToWrite(string _pathName)
         {

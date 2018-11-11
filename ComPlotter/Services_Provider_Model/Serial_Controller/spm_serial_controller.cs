@@ -49,7 +49,7 @@ namespace ComPlotter
                         m_threadGuard.ReleaseMutex();
                     }
                 }
-                catch (Exception _e)
+                catch (Exception)
                 {
                     throw new InvalidOperationException();
                 }
@@ -97,12 +97,13 @@ namespace ComPlotter
 
                     Random testRand = new Random();
 
-                    SerialData.Add( (byte) testRand.Next( 0 , 255 ) );
+                   // SerialData.Add( (byte) testRand.Next( 0 , 255 ) );
 
                     byte tempByte = (byte)m_serialPort.ReadByte();
 
                     SerialData.Add(tempByte);
 
+                    Console.WriteLine(tempByte);
                     //Console.WriteLine(m_serialPort.ReadLine());
 
                     m_threadGuard.ReleaseMutex();

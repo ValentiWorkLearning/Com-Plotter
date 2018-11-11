@@ -7,16 +7,13 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 
-namespace ComPlotter.Settings_Page_Model.File_Writer
+namespace ComPlotter
 {
     class AdditionalWriter: AbstractFileWriter
     {
         public override void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            foreach (decimal value in e.NewItems)
-            {
-                Console.WriteLine( value );
-            }
+            Console.WriteLine("Special writer");
         }
     }
 }

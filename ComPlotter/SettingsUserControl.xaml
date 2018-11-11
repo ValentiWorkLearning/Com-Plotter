@@ -51,9 +51,9 @@
                         <ComboBoxItem>2</ComboBoxItem>
                     </ComboBox>
                     <ComboBox Name="ParityList"  Grid.Column="1" Grid.Row="3" SelectionChanged="ParityList_SelectionChanged" SelectedValuePath="Content">
+                        <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem>Even</ComboBoxItem>
                         <ComboBoxItem>Mark</ComboBoxItem>
-                        <ComboBoxItem>None</ComboBoxItem>
                         <ComboBoxItem>Odd</ComboBoxItem>
                         <ComboBoxItem>Space</ComboBoxItem>
                     </ComboBox>

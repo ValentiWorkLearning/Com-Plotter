@@ -19,6 +19,7 @@ using LiveCharts.Wpf;
 using System.Windows.Threading;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using ComPlotter.Algorithms;
 
 namespace ComPlotter
 {
@@ -31,16 +32,11 @@ namespace ComPlotter
         {
             InitializeComponent();
 
-            m_timer = new DispatcherTimer();
-            m_timer.Tick += new EventHandler(timer_Tick);
-            m_timer.Interval = new TimeSpan(0, 0, 0, 0, 1);
-            m_timer.Start();
-
-            m_chartValues = new ChartValues<int> { 1,2,3,4,5,6,7,8,9,10 };
+            m_chartValues = new ChartValues<int> { 0, 0, 0, 0, 0, 0, 0, 0 };
 
             DataContext = this;
 
-            DisplayChart.AnimationsSpeed = TimeSpan.FromMilliseconds(100);
+            DisplayChart.AnimationsSpeed = TimeSpan.FromMilliseconds(10);
 
             DisplayChart.DataTooltip = null;
 
@@ -50,34 +46,27 @@ namespace ComPlotter
 
         }
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            //Random random = new Random();
-            //m_chartValues.Add(random.Next(0,10));
-            //if (m_chartValues.Count > 100)
-            //{
-            //    m_chartValues.RemoveAt(0);
-
-            //}
-         }
-
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            m_chartValues[0] = 4;
-            m_chartValues[1] = 4;
-            m_chartValues[3] = 4;
+            for (int i = 0; i < m_chartValues.Count; i++)
+            {
+                m_chartValues[i] = 0;
+            }
         }
 
         public void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            int toAdd = ((byte)e.NewItems[0]);
+            DensityDistribution density = new DensityDistribution( m_chartValues.Count );
 
-            m_chartValues.Add( toAdd );
+            byte toAdd = ((byte)e.NewItems[0]);
+
+            int index = density.getIntervalIndexOfValue( toAdd );
+
+            m_chartValues[index]++;
         }
 
         public ChartValues<int> m_chartValues { get; set; }
 
-        DispatcherTimer m_timer;
         ISerialServicesFacade SerialServices;
     }
 }

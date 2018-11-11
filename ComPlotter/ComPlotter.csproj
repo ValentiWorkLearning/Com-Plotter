@@ -41,11 +41,14 @@
     <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialDesignColors, Version=1.0.0.14576, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.1.1\lib\net45\MaterialDesignColors.dll</HintPath>
+    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.0.1205, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.0.1205\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="RangeTree, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RangeTree.1.0.6\lib\net45\RangeTree.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -69,11 +72,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Algorithms\al_density_distribution.cs" />
     <Compile Include="ComPlotControl.xaml.cs">
       <DependentUpon>ComPlotControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Factories\uc_iarguments_parser.cs" />
-    <Compile Include="Factories\uc_list_view_arguments_parser.cs" />
+    <Compile Include="Parsers\uc_iarguments_parser.cs" />
+    <Compile Include="Parsers\uc_list_view_arguments_parser.cs" />
     <Compile Include="Services_Provider_Model\File_Writer\spm_additional_writer.cs" />
     <Compile Include="Services_Provider_Model\File_Writer\spm_all_received_data_writer.cs" />
     <Compile Include="Services_Provider_Model\File_Writer\spm_ifile_writer.cs" />
@@ -142,5 +146,6 @@
   <ItemGroup>
     <Resource Include="Resources\Icons\project_settings.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

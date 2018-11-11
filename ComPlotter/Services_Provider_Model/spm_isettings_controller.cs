@@ -9,5 +9,7 @@ namespace ComPlotter
     public interface ISerialServicesFacade : IDisposable
     {
         ISerialController SerialController { get; }
+
+        List< AbstractFileWriter > FileWriters { get; }
     }
 }

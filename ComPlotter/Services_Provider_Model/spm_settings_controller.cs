@@ -16,6 +16,13 @@ namespace ComPlotter
             m_serialController = new SerialController();
 
             Application.Current.Exit += new ExitEventHandler(Application_ApplicationExit);
+
+            m_fileWriters = new List<AbstractFileWriter> { new AdditionalWriter(), new AllReceivedDataWriter() };
+
+            foreach (var writer in m_fileWriters)
+            {
+                m_serialController.SerialData.CollectionChanged += writer.CollectionChanged;
+            }
         }
 
         private void Application_ApplicationExit(object sender, EventArgs e)
@@ -30,6 +37,9 @@ namespace ComPlotter
 
         public ISerialController SerialController { get { return m_serialController; } }
 
+        public List<AbstractFileWriter> FileWriters { get { return m_fileWriters; } }
+
         ISerialController m_serialController;
+        List<AbstractFileWriter> m_fileWriters;
     }
 }

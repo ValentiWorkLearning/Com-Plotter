@@ -45,7 +45,7 @@ namespace ComPlotter
             {
                 SerialServices.SerialController.Connect();
             }
-            catch (InvalidOperationException _e)
+            catch (InvalidOperationException )
             {
                 MessageBox.Show("Error occured when trying to open Serial", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
