@@ -97,14 +97,16 @@ namespace ComPlotter
 
                     Random testRand = new Random();
 
-                   // SerialData.Add( (byte) testRand.Next( 0 , 255 ) );
+                    SerialData.Add( (byte) testRand.Next( 30 , 255 ) );
 
-                    byte tempByte = (byte)m_serialPort.ReadByte();
-
-                    SerialData.Add(tempByte);
-
-                    Console.WriteLine(tempByte);
-                    //Console.WriteLine(m_serialPort.ReadLine());
+                    string temp = m_serialPort.ReadLine();
+                    int result = 0;
+                    byte tempByte = (byte)result;
+                    if (Int32.TryParse(temp, out result))
+                    {
+                        tempByte = (byte)result;
+                        SerialData.Add(tempByte);
+                    }
 
                     m_threadGuard.ReleaseMutex();
 

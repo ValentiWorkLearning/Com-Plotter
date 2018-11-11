@@ -57,10 +57,10 @@
                         <ComboBoxItem>Odd</ComboBoxItem>
                         <ComboBoxItem>Space</ComboBoxItem>
                     </ComboBox>
-                    <Button Grid.Column="0" Grid.Row="4" Content="Apply" Click="Button_ApplyClick" Margin="5,5,5,5" />
-                    <Button Grid.Column="1" Grid.Row="4" Content="Connect" Click="Button_ConnectClick" Margin="5,5,5,5"/>
-                    <Button Grid.Column="1" Grid.Row="5" Content="Disconnect" Click="Button_DisconnectClick" Margin="5,5,5,5"/>
-                    <Button Grid.Column="0" Grid.Row="5" Content="Refresh"  Click="Button_RefreshClick" Margin="5,5,5,5"/>
+                    <Button Grid.Column="0" Grid.Row="4" Content="Apply" Click="Button_ApplyClick" Margin="5,5,5,5" Foreground="#DDFFFFFF" />
+                    <Button Grid.Column="1" Grid.Row="4" Content="Connect" Click="Button_ConnectClick" Margin="5,5,5,5" Foreground="#DDFFFFFF"/>
+                    <Button Grid.Column="1" Grid.Row="5" Content="Disconnect" Click="Button_DisconnectClick" Margin="5,5,5,5" Foreground="#DDFFFFFF"/>
+                    <Button Grid.Column="0" Grid.Row="5" Content="Refresh"  Click="Button_RefreshClick" Margin="5,5,5,5" Foreground="#DDFFFFFF"/>
                 </Grid>
             </Grid>
 
@@ -73,7 +73,7 @@
                     <TextBox AcceptsReturn="True" Height="27" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="186">
                         Enter the file name
                     </TextBox>
-                    <Button Grid.Column="1" Grid.Row="1" Content="Apply" Margin="10,10,10,10" />
+                    <Button Grid.Column="1" Grid.Row="1" Content="Apply" Margin="10,10,10,10" Foreground="#DDFFFFFF" />
                 </StackPanel>
             </Grid>
 

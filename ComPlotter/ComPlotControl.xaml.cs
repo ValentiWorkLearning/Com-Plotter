@@ -32,11 +32,11 @@ namespace ComPlotter
         {
             InitializeComponent();
 
-            m_chartValues = new ChartValues<int> { 0, 0, 0, 0, 0, 0, 0, 0 };
+            m_chartValues = new ChartValues<int> { 1, 1, 1, 1, 1,1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
             DataContext = this;
 
-            DisplayChart.AnimationsSpeed = TimeSpan.FromMilliseconds(10);
+            DisplayChart.AnimationsSpeed = TimeSpan.FromMilliseconds(100);
 
             DisplayChart.DataTooltip = null;
 

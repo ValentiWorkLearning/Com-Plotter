@@ -13,7 +13,7 @@ namespace ComPlotter
     {
         public override void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Console.WriteLine("Special writer");
+           // Console.WriteLine("Special writer");
         }
     }
 }

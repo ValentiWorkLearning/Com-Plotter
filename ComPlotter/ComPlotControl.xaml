@@ -22,9 +22,8 @@
                        />
                 </lvc:CartesianChart.Series>
             </lvc:CartesianChart>
-            <StackPanel Orientation="Vertical" Margin="5,5,5,5">
-                <Button x:Name="button" Content="Default"  Click="button_Click" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5,5,5,5"/>
-                <Button x:Name="button1" Content="Button"  Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5,5,5,5"/>
+            <StackPanel Orientation="Vertical" Margin="5,5,5,5" HorizontalAlignment="Right">
+                <Button x:Name="button" Content="Reset"  Click="button_Click" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="5,5,5,5" Foreground="#DDFFFFFF"/>
             </StackPanel>
         </StackPanel>
     </Grid>
