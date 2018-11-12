@@ -13,8 +13,8 @@ namespace ComPlotter
     {
         public override void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            //m_fileStream.WriteLineAsync((char)e.NewItems[0]);
-           // Console.WriteLine( "All data writer ");
+            if( m_fileStream!=null )
+                m_fileStream.WriteLine( ((byte)e.NewItems[0]).ToString() );
         }
     }
 }

@@ -74,12 +74,6 @@
                 </Grid>
 
                 <ListView x:Name="ListViewMenu" Foreground="#FFF9F9F9" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
-                    <ListViewItem  x:Name="ItemGeneral" Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Information" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="General" VerticalAlignment="Center"  Margin="20 10" FontSize="18"/>
-                        </StackPanel>
-                    </ListViewItem>
                     <ListViewItem x:Name="ItemChart" Height="60">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ChartBar" Height="25" Width="25" Margin="10"/>
@@ -92,10 +86,10 @@
                             <TextBlock Text="Settings" VerticalAlignment="Center" Margin="20 10" FontSize="18"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem x:Name="ItemRefresh" Height="60">
+                    <ListViewItem  x:Name="ItemGeneral" Height="60">
                         <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Update" Height="25" Width="25" Margin="10"/>
-                            <TextBlock Text="Refresh" VerticalAlignment="Center"  Margin="20 10" FontSize="18"/>
+                            <materialDesign:PackIcon Kind="Information" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="General" VerticalAlignment="Center"  Margin="20 10" FontSize="18"/>
                         </StackPanel>
                     </ListViewItem>
                 </ListView>

@@ -80,6 +80,8 @@
     <Compile Include="Parsers\uc_list_view_arguments_parser.cs" />
     <Compile Include="Services_Provider_Model\File_Writer\spm_additional_writer.cs" />
     <Compile Include="Services_Provider_Model\File_Writer\spm_all_received_data_writer.cs" />
+    <Compile Include="Services_Provider_Model\File_Writer\spm_files_manager.cs" />
+    <Compile Include="Services_Provider_Model\File_Writer\spm_ifiles_manager.cs" />
     <Compile Include="Services_Provider_Model\File_Writer\spm_ifile_writer.cs" />
     <Compile Include="Services_Provider_Model\Serial_Controller\spm_iserial_controller.cs" />
     <Compile Include="Services_Provider_Model\spm_isettings_controller.cs" />

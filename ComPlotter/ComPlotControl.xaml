@@ -32,7 +32,6 @@
                     <ComboBoxItem>64</ComboBoxItem>
                     <ComboBoxItem>128</ComboBoxItem>
                 </ComboBox>
-                
             </StackPanel>
         </StackPanel>
     </Grid>

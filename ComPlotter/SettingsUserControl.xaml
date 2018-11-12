@@ -71,9 +71,9 @@
                 </Grid>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,10,10">
                     <TextBlock  Text="All bytes stream file "></TextBlock>
-                    <Button Grid.Column="1" Grid.Row="1" Content="Select File" Margin="10,10,10,10" Foreground="#DDFFFFFF" Click="Button_Click"/>
+                    <Button Grid.Column="1" Grid.Row="1" Content="Select File" Margin="10,10,10,10" Foreground="#DDFFFFFF" Click="Button_SelectAllStreamFileClick"/>
                     <TextBlock  Text="Chunked stream file "></TextBlock>
-                    <Button Grid.Column="1" Grid.Row="1" Content="Select File" Margin="10,10,10,10" Foreground="#DDFFFFFF" Click="Button_Click_1" />
+                    <Button Grid.Column="1" Grid.Row="1" Content="Select File" Margin="10,10,10,10" Foreground="#DDFFFFFF" Click="Button_SelectSpecialStreamFileClick" />
                 </StackPanel>
             </Grid>
 

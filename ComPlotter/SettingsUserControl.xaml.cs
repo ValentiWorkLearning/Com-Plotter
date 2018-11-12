@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -134,14 +135,28 @@ namespace ComPlotter
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_SelectAllStreamFileClick(object sender, RoutedEventArgs e)
         {
-
+            SetFileNameToWrite( SerialServices.FileManager.AllDataFileStream );
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_SelectSpecialStreamFileClick(object sender, RoutedEventArgs e)
         {
+            SetFileNameToWrite(SerialServices.FileManager.AdditionalFileStream);
+        }
 
+        void SetFileNameToWrite( AbstractFileWriter _writer )
+        {
+            OpenFileDialog Dialog = new OpenFileDialog();
+
+            Dialog.Filter = "Text files(*.txt )|*.txt;";
+            Dialog.CheckFileExists = true;
+            Dialog.Multiselect = true;
+
+            if (Dialog.ShowDialog() == true)
+            {
+                _writer.SetFileToWrite(Dialog.FileName);
+            }
         }
 
         string SerialName;
@@ -151,5 +166,6 @@ namespace ComPlotter
 
         ISerialServicesFacade SerialServices;
 
+        
     }
 }

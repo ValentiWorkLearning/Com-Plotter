@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using ComPlotter.Services_Provider_Model.File_Writer;
 
 namespace ComPlotter
 {
@@ -13,15 +14,15 @@ namespace ComPlotter
     {
         public SerialServicesProvider()
         {
-            m_serialController = new SerialController();
+            SerialController = new SerialController();
 
             Application.Current.Exit += new ExitEventHandler(Application_ApplicationExit);
 
-            m_fileWriters = new List<AbstractFileWriter> { new AdditionalWriter(), new AllReceivedDataWriter() };
+            FileManager = new FilesManager();
 
-            foreach (var writer in m_fileWriters)
+            foreach (AbstractFileWriter file in FileManager)
             {
-                m_serialController.SerialData.CollectionChanged += writer.CollectionChanged;
+                SerialController.SerialData.CollectionChanged += file.CollectionChanged;
             }
         }
 
@@ -32,14 +33,11 @@ namespace ComPlotter
 
         public void Dispose()
         {
-            m_serialController.Dispose();
+            SerialController.Dispose();
+            FileManager.Dispose();
         }
 
-        public ISerialController SerialController { get { return m_serialController; } }
-
-        public List<AbstractFileWriter> FileWriters { get { return m_fileWriters; } }
-
-        ISerialController m_serialController;
-        List<AbstractFileWriter> m_fileWriters;
+        public ISerialController SerialController { get; }
+        public IFilesManager FileManager { get; }
     }
 }

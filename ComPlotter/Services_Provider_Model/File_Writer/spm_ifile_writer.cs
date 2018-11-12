@@ -13,10 +13,6 @@ namespace ComPlotter
     {
         public void SetFileToWrite(string _pathName)
         {
-            if (File.Exists(_pathName))
-            {
-                File.Delete(_pathName);
-            }
             m_fileStream = File.CreateText(_pathName);
         }
 
@@ -27,7 +23,11 @@ namespace ComPlotter
 
         public void Dispose()
         {
-            m_fileStream.Dispose();
+            if (m_fileStream != null)
+            {
+                m_fileStream.Close();
+                m_fileStream.Dispose();
+            }
         }
 
         protected StreamWriter m_fileStream;

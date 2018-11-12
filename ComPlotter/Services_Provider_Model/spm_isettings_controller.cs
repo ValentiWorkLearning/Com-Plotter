@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComPlotter.Services_Provider_Model.File_Writer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace ComPlotter
     {
         ISerialController SerialController { get; }
 
-        List< AbstractFileWriter > FileWriters { get; }
+        IFilesManager FileManager{ get; }
     }
 }
