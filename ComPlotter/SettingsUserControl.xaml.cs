@@ -47,7 +47,12 @@ namespace ComPlotter
             }
             catch (InvalidOperationException )
             {
-                MessageBox.Show("Error occured when trying to open Serial", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(
+                        Properties.Resources.Error_FailureWithOpenSerialConnection
+                    ,   Properties.Resources.Error_Caption_FailureWithOpenSerialConnection
+                    ,   MessageBoxButton.OK
+                    ,   MessageBoxImage.Error
+                );
             }
         }
 
@@ -99,7 +104,7 @@ namespace ComPlotter
         {
      
             // restore internal properties
-            SerialBaudrate  =   BaudrateList.Items[ Properties.Settings.Default.SerialBaudRate ].ToString();
+            SerialBaudrate  = BaudrateList.Items[ Properties.Settings.Default.SerialBaudRate ].ToString();
             SerialStopBits  =   StopBitsList.Items[ Properties.Settings.Default.SerialStopBits ].ToString();
             SerialParity    =   ParityList.Items[ Properties.Settings.Default.SerialParity ].ToString();
 
@@ -126,6 +131,16 @@ namespace ComPlotter
             {
                 SerialName = null;
             }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
 
         }
 

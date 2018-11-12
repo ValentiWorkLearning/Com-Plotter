@@ -14,22 +14,26 @@ namespace ComPlotter.Algorithms
             m_rangeTree = new RangeTree<byte, RangeItem>( new RangeItemComparer() );
 
             int rangeDistance = MaxRightRangeValue / _rangesCount;
-
             int leftRangeValue = 0;
-
             int rightRangeValue = rangeDistance - 1;
 
             for (int i = 0; i < _rangesCount; i++)
             {
                 
-                m_rangeTree.Add(new RangeItem { Range = new Range< byte >( (byte) leftRangeValue , (byte) rightRangeValue ), Content = i.ToString() } );
+                m_rangeTree.Add(new RangeItem {
+                        Range = new Range< byte >(
+                                (byte) leftRangeValue
+                            ,   (byte) rightRangeValue )
+                            ,   Content = i.ToString()
+                        } 
+                    );
 
                 leftRangeValue = rightRangeValue + 1;
                 rightRangeValue += rangeDistance;
             }
         }
 
-        public int getIntervalIndexOfValue(byte _value)
+        public int GetIntervalIndexOfValue(byte _value)
         {
             var range = m_rangeTree.Query(_value);
             int rangeIndex = Int32.Parse(range[0].Content);

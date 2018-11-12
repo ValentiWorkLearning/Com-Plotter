@@ -1,11 +1,11 @@
 #include <array>
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   while (!Serial){}
 }
 
-std::array<byte ,134 > normalDistribution = { 227,
+std::array<byte ,124 > normalDistribution = { 227,
 117,
 100,
 227,

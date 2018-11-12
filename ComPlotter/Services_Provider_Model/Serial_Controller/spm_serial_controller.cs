@@ -28,6 +28,7 @@ namespace ComPlotter
 
         public void Connect()
         {
+            Console.WriteLine(m_serialPort.PortName);
             Console.WriteLine(m_serialPort.BaudRate);
             Console.WriteLine(m_serialPort.DataBits);
             Console.WriteLine(m_serialPort.StopBits);
@@ -97,17 +98,18 @@ namespace ComPlotter
 
                     Random testRand = new Random();
 
-                    SerialData.Add( (byte) testRand.Next( 30 , 255 ) );
+                    SerialData.Add( (byte) testRand.Next( 10 , 255 ) );
 
                     string temp = m_serialPort.ReadLine();
                     int result = 0;
                     byte tempByte = (byte)result;
+                    
                     if (Int32.TryParse(temp, out result))
                     {
                         tempByte = (byte)result;
                         SerialData.Add(tempByte);
                     }
-
+                    Console.WriteLine(tempByte);
                     m_threadGuard.ReleaseMutex();
 
                 }

@@ -64,16 +64,16 @@
                 </Grid>
             </Grid>
 
-            <Grid x:Name="FileMenu" Height="175" Width="240" Background="Beige" Margin="10" VerticalAlignment="Top">
+            <Grid x:Name="FileMenu" Height="195" Width="240" Background="Beige" Margin="10" VerticalAlignment="Top">
 
                 <Grid Height="40" VerticalAlignment="Top" Background="#439889">
                     <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Icons/file_settings_icon.png" VerticalAlignment="Center" />
                 </Grid>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,10,10">
-                    <TextBox AcceptsReturn="True" Height="27" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Width="186">
-                        Enter the file name
-                    </TextBox>
-                    <Button Grid.Column="1" Grid.Row="1" Content="Apply" Margin="10,10,10,10" Foreground="#DDFFFFFF" />
+                    <TextBlock  Text="All bytes stream file "></TextBlock>
+                    <Button Grid.Column="1" Grid.Row="1" Content="Select File" Margin="10,10,10,10" Foreground="#DDFFFFFF" Click="Button_Click"/>
+                    <TextBlock  Text="Chunked stream file "></TextBlock>
+                    <Button Grid.Column="1" Grid.Row="1" Content="Select File" Margin="10,10,10,10" Foreground="#DDFFFFFF" Click="Button_Click_1" />
                 </StackPanel>
             </Grid>
 

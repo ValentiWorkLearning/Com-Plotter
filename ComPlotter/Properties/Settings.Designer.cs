@@ -82,5 +82,17 @@ namespace ComPlotter.Properties {
                 this["Setting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int BarsNumber {
+            get {
+                return ((int)(this["BarsNumber"]));
+            }
+            set {
+                this["BarsNumber"] = value;
+            }
+        }
     }
 }
