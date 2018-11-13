@@ -27,6 +27,7 @@ namespace ComPlotter
             SerialFacade = new SerialServicesProvider();
             controlsFactory = new UserControlsFactory();
             currentControl = new UserControl();
+            BodyArea.Children.Add(new AboutControl());
         }
 
         private void ButtonPopUpQuit_Click(object sender, RoutedEventArgs e)

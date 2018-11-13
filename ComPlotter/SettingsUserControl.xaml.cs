@@ -149,7 +149,7 @@ namespace ComPlotter
         {
             OpenFileDialog Dialog = new OpenFileDialog();
 
-            Dialog.Filter = "Text files(*.txt )|*.txt;";
+            Dialog.Filter = Properties.Resources.FilesExtensionsFilter;
             Dialog.CheckFileExists = true;
             Dialog.Multiselect = true;
 
@@ -159,6 +159,11 @@ namespace ComPlotter
             }
         }
 
+        private void Button_SelectReceivedBlockSizeClick(object sender, RoutedEventArgs e)
+        {
+            SerialServices.FileManager.AdditionalFileStream.SetReceivedBlockSize(ReceivedBlockSize.Value.Value);
+        }
+
         string SerialName;
         string SerialBaudrate;
         string SerialStopBits;
@@ -166,6 +171,6 @@ namespace ComPlotter
 
         ISerialServicesFacade SerialServices;
 
-        
+
     }
 }

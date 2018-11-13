@@ -14,10 +14,10 @@ namespace ComPlotter
         void Connect();
 
         void Configure(
-            string _name
-        ,   string _baudrate
-        ,   string _bits
-        ,   string _parity
+                string _name
+            ,   string _baudrate
+            ,   string _bits
+            ,   string _parity
         );
 
         void RefreshState();

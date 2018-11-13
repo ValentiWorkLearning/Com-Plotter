@@ -20,6 +20,9 @@ namespace ComPlotter.Factories
                 case "ItemChart":
                     return ChildWindowType.ChartPage;
 
+                case "ItemGeneral":
+                    return ChildWindowType.AboutPage;
+
                 default:
                     throw new InvalidOperationException();
             }

@@ -123,4 +123,22 @@
   <data name="Error_FailureWithOpenSerialConnection" xml:space="preserve">
     <value>Error occured when trying to open Serial</value>
   </data>
+  <data name="FilesExtensionsFilter" xml:space="preserve">
+    <value>Text files(*.txt )|*.txt;</value>
+  </data>
+  <data name="TitleAverageBlockValue" xml:space="preserve">
+    <value>Average:</value>
+  </data>
+  <data name="TitleForBlockEnd" xml:space="preserve">
+    <value>/***************************/</value>
+  </data>
+  <data name="TitleForBlockStart" xml:space="preserve">
+    <value>/********BLOCK_%**********/</value>
+  </data>
+  <data name="TitleOneBitsCount" xml:space="preserve">
+    <value>OneBits:</value>
+  </data>
+  <data name="TitleZeroBitsCount" xml:space="preserve">
+    <value>ZeroBits:</value>
+  </data>
 </root>

@@ -43,7 +43,7 @@ namespace ComPlotter
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            FillChartWithValue(0);
+            FillChartWithValue(1);
         }
 
         public void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

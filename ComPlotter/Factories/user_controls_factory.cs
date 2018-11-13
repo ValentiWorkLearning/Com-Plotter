@@ -23,6 +23,8 @@ namespace ComPlotter
                 case ChildWindowType.ChartPage:
                     return new ComPlotControl(_facade);
 
+                case ChildWindowType.AboutPage:
+                    return new AboutControl();
                 default:
                     throw new InvalidOperationException();
             }

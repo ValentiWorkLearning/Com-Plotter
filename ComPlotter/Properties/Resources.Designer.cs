@@ -77,5 +77,59 @@ namespace ComPlotter.Properties {
                 return ResourceManager.GetString("Error_FailureWithOpenSerialConnection", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text files(*.txt )|*.txt;.
+        /// </summary>
+        internal static string FilesExtensionsFilter {
+            get {
+                return ResourceManager.GetString("FilesExtensionsFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average:.
+        /// </summary>
+        internal static string TitleAverageBlockValue {
+            get {
+                return ResourceManager.GetString("TitleAverageBlockValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /***************************/.
+        /// </summary>
+        internal static string TitleForBlockEnd {
+            get {
+                return ResourceManager.GetString("TitleForBlockEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /********BLOCK_%**********/.
+        /// </summary>
+        internal static string TitleForBlockStart {
+            get {
+                return ResourceManager.GetString("TitleForBlockStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OneBits:.
+        /// </summary>
+        internal static string TitleOneBitsCount {
+            get {
+                return ResourceManager.GetString("TitleOneBitsCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ZeroBits:.
+        /// </summary>
+        internal static string TitleZeroBitsCount {
+            get {
+                return ResourceManager.GetString("TitleZeroBitsCount", resourceCulture);
+            }
+        }
     }
 }

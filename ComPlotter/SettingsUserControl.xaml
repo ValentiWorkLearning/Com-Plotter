@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ComPlotter"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="905">
     <Grid Background="White" >
@@ -77,10 +78,15 @@
                 </StackPanel>
             </Grid>
 
-            <Grid Height="320" Width="220" Background="Beige" Margin="10">
+            <Grid Height="195" Width="220" Background="Beige" Margin="10" VerticalAlignment="Top">
                 <Grid Height="40" VerticalAlignment="Top" Background="#439889">
                     <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Icons/project_settings.png" VerticalAlignment="Center" />
                 </Grid>
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,50,10,10">
+                 <TextBlock  Text="Received block size "></TextBlock>
+                    <xctk:IntegerUpDown Name="ReceivedBlockSize"  Watermark="Enter block size" DefaultValue="1" />
+                    <Button Grid.Column="1" Grid.Row="1" Content="Apply" Margin="10,10,10,10" Foreground="#DDFFFFFF" Click="Button_SelectReceivedBlockSizeClick" />
+                </StackPanel>
             </Grid>
 
         </StackPanel>

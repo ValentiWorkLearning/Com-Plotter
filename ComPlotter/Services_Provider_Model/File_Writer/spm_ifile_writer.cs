@@ -21,6 +21,11 @@ namespace ComPlotter
             throw new InvalidOperationException();
         }
 
+        public virtual void SetReceivedBlockSize( int _blockSize )
+        {
+            throw new InvalidOperationException();
+        }
+
         public void Dispose()
         {
             if (m_fileStream != null)
