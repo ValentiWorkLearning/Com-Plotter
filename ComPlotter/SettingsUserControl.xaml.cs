@@ -171,6 +171,5 @@ namespace ComPlotter
 
         ISerialServicesFacade SerialServices;
 
-
     }
 }

@@ -96,10 +96,6 @@ namespace ComPlotter
                 {
                     m_threadGuard.WaitOne();
 
-                    Random testRand = new Random();
-
-                    SerialData.Add( (byte) testRand.Next( 10 , 255 ) );
-
                     string temp = m_serialPort.ReadLine();
                     int result = 0;
                     byte tempByte = (byte)result;
