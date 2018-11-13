@@ -37,6 +37,12 @@ namespace ComPlotter
 
         private void ButtonPopUpAbout_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(
+                    Properties.Resources.Author
+                ,   Properties.Resources.AboutDialogTitle
+                ,   MessageBoxButton.OK
+                ,   MessageBoxImage.Information
+                );
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
