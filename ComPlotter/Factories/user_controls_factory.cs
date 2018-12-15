@@ -18,10 +18,10 @@ namespace ComPlotter
             switch ( ArgumentsParser.TryParseValue(sender ) )
             {
                 case ChildWindowType.Settings:
-                    return new SettingsUserControl(_facade);
+                    return new SettingsUserControl( _facade );
 
                 case ChildWindowType.ChartPage:
-                    return new ComPlotControl(_facade);
+                    return new ComPlotControl( _facade );
 
                 case ChildWindowType.AboutPage:
                     return new AboutControl();
