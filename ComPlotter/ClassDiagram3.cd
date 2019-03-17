@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ComPlotter.Algorithms.DensityDistribution">
+    <Position X="0.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="ComPlotter.Algorithms.DensityDistribution.RangeItem" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Algorithms\al_density_distribution.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+      <Class Name="ComPlotter.Algorithms.DensityDistribution.RangeItemComparer" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Algorithms\al_density_distribution.cs</NewMemberFileName>
+        </TypeIdentifier>
+        <Lollipop Position="0.2" />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAAAAAAAAAAAAAEAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Algorithms\al_density_distribution.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComPlotter.UserControlsFactory">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\user_controls_factory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComPlotter.Factories.WindowTypesParser">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="ComPlotter.Factories.WindowTypesParser.ChildWindowType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Parsers\uc_list_view_arguments_parser.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Parsers\uc_list_view_arguments_parser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ComPlotter.AdditionalWriter">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAQAAAEAkEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services_Provider_Model\File_Writer\spm_additional_writer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComPlotter.AllReceivedDataWriter">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services_Provider_Model\File_Writer\spm_all_received_data_writer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ComPlotter.Services_Provider_Model.File_Writer.FilesManager">
+    <Position X="4.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAABBAAAACAAAAAAAAAAAAEIgAAABAAAAA=</HashCode>
+      <FileName>Services_Provider_Model\File_Writer\spm_files_manager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ComPlotter.AbstractFileWriter">
+    <Position X="7.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACAAAAQEAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services_Provider_Model\File_Writer\spm_ifile_writer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ComPlotter.SerialController">
+    <Position X="0.5" Y="7.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAgAAAAAkAABACIAAQAAAgAAAAAAFEAAAAAA=</HashCode>
+      <FileName>Services_Provider_Model\Serial_Controller\spm_serial_controller.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ComPlotter.SerialServicesProvider">
+    <Position X="2.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACBAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services_Provider_Model\spm_settings_controller.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ComPlotter.MainWindow">
+    <Position X="4.25" Y="9.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABEACAAAAAAAAAAAQAAAIAQBAAAAAAABAAAAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ComPlotter.ComPlotControl">
+    <Position X="7" Y="9.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAgAAAAAAAEAAAAAgAAAIAABAACAgAAKAAAAAAA=</HashCode>
+      <FileName>ComPlotControl.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ComPlotter.SettingsUserControl">
+    <Position X="9.25" Y="9.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAACABAAABAEgYZAAAAAQMAAAAACAQAAAAACAEBA=</HashCode>
+      <FileName>SettingsUserControl.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="ComPlotter.AboutControl">
+    <Position X="2.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AboutControl.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="ComPlotter.Factories.IArgumentsParser">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Parsers\uc_iarguments_parser.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ComPlotter.Services_Provider_Model.File_Writer.IFilesManager">
+    <Position X="4.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAABAAAAA=</HashCode>
+      <FileName>Services_Provider_Model\File_Writer\spm_ifiles_manager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ComPlotter.ISerialController">
+    <Position X="0.5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAkAABAAIAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services_Provider_Model\Serial_Controller\spm_iserial_controller.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ComPlotter.ISerialServicesFacade">
+    <Position X="2.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services_Provider_Model\spm_isettings_controller.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

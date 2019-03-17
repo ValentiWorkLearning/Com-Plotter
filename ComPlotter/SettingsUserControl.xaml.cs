@@ -32,12 +32,24 @@ namespace ComPlotter
 
         private void Button_ApplyClick(object sender, RoutedEventArgs e)
         {
-            SerialServices.SerialController.Configure(
-                    SerialName
-                ,   SerialBaudrate
-                ,   SerialStopBits
-                ,   SerialParity
-            );
+            try
+            {
+                SerialServices.SerialController.Configure(
+                        SerialName
+                    ,   SerialBaudrate
+                    ,   SerialStopBits
+                    ,   SerialParity
+                );
+            }
+            catch (InvalidOperationException)
+            {
+                    MessageBox.Show(
+                        Properties.Resources.Error_FailureWithOpenSerialConnection
+                    ,   Properties.Resources.Error_Caption_FailureWithOpenSerialConnection
+                    ,   MessageBoxButton.OK
+                    ,   MessageBoxImage.Error
+                  );
+            }
         }
 
         private void Button_ConnectClick(object sender, RoutedEventArgs e)
@@ -46,7 +58,7 @@ namespace ComPlotter
             {
                 SerialServices.SerialController.Connect();
             }
-            catch (InvalidOperationException )
+            catch ( InvalidOperationException )
             {
                 MessageBox.Show(
                         Properties.Resources.Error_FailureWithOpenSerialConnection
@@ -147,11 +159,12 @@ namespace ComPlotter
 
         void SetFileNameToWrite( AbstractFileWriter _writer )
         {
-            OpenFileDialog Dialog = new OpenFileDialog();
-
-            Dialog.Filter = Properties.Resources.FilesExtensionsFilter;
-            Dialog.CheckFileExists = true;
-            Dialog.Multiselect = true;
+            OpenFileDialog Dialog = new OpenFileDialog
+            {
+                    Filter = Properties.Resources.FilesExtensionsFilter
+                ,   CheckFileExists = true
+                ,   Multiselect = true
+            };
 
             if (Dialog.ShowDialog() == true)
             {

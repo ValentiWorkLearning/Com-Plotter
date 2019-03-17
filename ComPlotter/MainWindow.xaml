@@ -92,6 +92,12 @@
                             <TextBlock Text="General" VerticalAlignment="Center"  Margin="20 10" FontSize="18"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem  x:Name="ItemTempPressureChart" Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="TemperatureCelsius" Height="25" Width="25" Margin="10"/>
+                            <TextBlock Text="General" VerticalAlignment="Center"  Margin="20 10" FontSize="18"/>
+                        </StackPanel>
+                    </ListViewItem>
                 </ListView>
 
             </StackPanel>

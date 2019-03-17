@@ -9,6 +9,12 @@ using System.Collections.Specialized;
 
 namespace ComPlotter
 {
+    public enum ReceivingPolicy
+    {
+            ByteStream
+        ,   StringToEndline
+    };
+
     public interface ISerialController : IDisposable
     {
         void Connect();
@@ -24,8 +30,10 @@ namespace ComPlotter
 
         void Disconnect();
 
-        List<string> AvaliableSerials { get; }
+        void SetReceivingPolicy( ReceivingPolicy _policy );
 
+        List< string > AvaliableSerials { get; }
         ObservableCollection<byte> SerialData { get; }
+        ObservableCollection<string> SerialDataString { get; }
     }
 }

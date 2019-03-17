@@ -1,4 +1,5 @@
 ﻿using ComPlotter.Factories;
+using ComPlotter.Parsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace ComPlotter
         {
             InitializeComponent();
             SerialFacade = new SerialServicesProvider();
+            DataParser = new ReceivedDataParser();
             controlsFactory = new UserControlsFactory();
             currentControl = new UserControl();
             BodyArea.Children.Add(new AboutControl());
@@ -63,13 +65,14 @@ namespace ComPlotter
 
             controlsFactory.ArgumentsParser = new WindowTypesParser();
 
-            currentControl = controlsFactory.CreateDialog(sender, SerialFacade);
+            currentControl = controlsFactory.CreateDialog( sender, SerialFacade , DataParser );
 
             BodyArea.Children.Add(currentControl);
 
         }
 
         ISerialServicesFacade SerialFacade;
+        IReceivedDataParser DataParser;
         UserControlsFactory controlsFactory;
         UserControl currentControl;
     }

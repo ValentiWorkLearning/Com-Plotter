@@ -23,6 +23,9 @@ namespace ComPlotter.Factories
                 case "ItemGeneral":
                     return ChildWindowType.AboutPage;
 
+                case "ItemTempPressureChart":
+                    return ChildWindowType.TemperaturePressure;
+
                 default:
                     throw new InvalidOperationException();
             }
@@ -33,6 +36,7 @@ namespace ComPlotter.Factories
                 Settings
            ,    ChartPage
            ,    AboutPage
+           ,    TemperaturePressure
         }
     }
 }

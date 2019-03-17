@@ -20,40 +20,49 @@ namespace ComPlotter
                 WriteTimeout = 500
             };
 
-            m_readerThread = new Thread(ReadTask);
+            m_readerThread = new Thread( ReadTaskBytestream );
             m_threadGuard = new Mutex();
             SerialData = new ObservableCollection<byte>();
+            SerialDataString = new ObservableCollection<string>();
             m_isFirstThreadLaunch = true;
+            m_isConfigured = false;
         }
 
         public void Connect()
         {
-            Console.WriteLine(m_serialPort.PortName);
-            Console.WriteLine(m_serialPort.BaudRate);
-            Console.WriteLine(m_serialPort.DataBits);
-            Console.WriteLine(m_serialPort.StopBits);
-            Console.WriteLine(m_serialPort.Parity);
-
-            if ( !m_serialPort.IsOpen )
+            if (m_isConfigured)
             {
-                try
-                {
-                    m_serialPort.Open();
+                Console.WriteLine(m_serialPort.PortName);
+                Console.WriteLine(m_serialPort.BaudRate);
+                Console.WriteLine(m_serialPort.DataBits);
+                Console.WriteLine(m_serialPort.StopBits);
+                Console.WriteLine(m_serialPort.Parity);
 
-                    if ( m_isFirstThreadLaunch )
-                    {
-                        m_readerThread.Start();
-                        m_isFirstThreadLaunch = false;
-                    }
-                    else
-                    {
-                        m_threadGuard.ReleaseMutex();
-                    }
-                }
-                catch (Exception)
+                if (!m_serialPort.IsOpen)
                 {
-                    throw new InvalidOperationException();
+                    try
+                    {
+                        m_serialPort.Open();
+
+                        if (m_isFirstThreadLaunch)
+                        {
+                            m_readerThread.Start();
+                            m_isFirstThreadLaunch = false;
+                        }
+                        else
+                        {
+                            m_threadGuard.ReleaseMutex();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        throw new InvalidOperationException();
+                    }
                 }
+            }
+            else
+            {
+                throw new InvalidOperationException();
             }
         }
 
@@ -81,14 +90,18 @@ namespace ComPlotter
             ,   string _parity
             )
         {
+            if( string.IsNullOrEmpty( _name ))
+                throw new InvalidOperationException();
+
             m_serialPort.PortName = _name;
 
             m_serialPort.BaudRate = int.Parse(_baudrate);
             m_serialPort.Parity = (Parity)Enum.Parse(typeof(Parity), _parity, true);
             m_serialPort.StopBits = (StopBits)Enum.Parse(typeof(StopBits), _bits, true);
+            m_isConfigured = true;
         }
 
-        private void ReadTask()
+        private void ReadTaskBytestream()
         {
             while ( true )
             {
@@ -96,20 +109,39 @@ namespace ComPlotter
                 {
                     m_threadGuard.WaitOne();
 
-                    string temp = m_serialPort.ReadLine();
-                    int result = 0;
-                    byte tempByte = (byte)result;
-                    
-                    if (Int32.TryParse(temp, out result))
+                    string receivedString = m_serialPort.ReadLine();
+                    foreach( char c in receivedString)
                     {
-                        tempByte = (byte)result;
-                        SerialData.Add(tempByte);
+                        byte tempByte = (byte)c;
+                        SerialData.Add( tempByte );
+                        Console.WriteLine( tempByte );
                     }
-                    Console.WriteLine(tempByte);
                     m_threadGuard.ReleaseMutex();
 
                 }
                 catch ( System.TimeoutException )
+                {
+                    m_threadGuard.ReleaseMutex();
+                }
+            }
+        }
+
+        private void ReadTaskReadline()
+        {
+            while( true )
+            {
+                try
+                {
+                    m_threadGuard.WaitOne();
+
+                    string toAdd = m_serialPort.ReadLine();
+
+                    SerialDataString.Add( toAdd );
+
+                    Console.WriteLine( toAdd );
+                    m_threadGuard.ReleaseMutex();
+                }
+                catch (System.TimeoutException)
                 {
                     m_threadGuard.ReleaseMutex();
                 }
@@ -125,6 +157,36 @@ namespace ComPlotter
             GC.SuppressFinalize(this);
         }
 
+        public void SetReceivingPolicy( ReceivingPolicy _policy )
+        {
+            if (_policy != policy)
+            {
+                if ( this.m_isConfigured )
+                {
+                    policy = _policy;
+
+                    m_threadGuard.WaitOne();
+                    m_serialPort.Close();
+
+                    m_readerThread.Abort();
+
+                    if ( policy == ReceivingPolicy.ByteStream )
+                    {
+                        m_readerThread = new Thread( ReadTaskBytestream );
+                    }
+                    else if ( policy == ReceivingPolicy.StringToEndline )
+                    {
+                        m_readerThread = new Thread( ReadTaskReadline );
+                    }
+
+                    this.m_isFirstThreadLaunch = true;
+                    this.Connect();
+
+                    m_threadGuard.ReleaseMutex();
+                }
+            }
+        }
+
         public ObservableCollection<byte> SerialData { get; }
 
         public List<string> AvaliableSerials {
@@ -133,12 +195,15 @@ namespace ComPlotter
             }
         }
 
+        public ObservableCollection<string> SerialDataString { get; }
+
         bool m_isFirstThreadLaunch;
+        bool m_isConfigured;
+
+        ReceivingPolicy policy;
 
         Thread m_readerThread;
-
         Mutex m_threadGuard;
-
         SerialPort m_serialPort;
 
     }

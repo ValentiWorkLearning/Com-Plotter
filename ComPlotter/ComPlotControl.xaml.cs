@@ -36,7 +36,7 @@ namespace ComPlotter
 
             InitChartView();
             ResetChartValues();
-
+            SerialServices.SerialController.SetReceivingPolicy( ReceivingPolicy.ByteStream );
             SerialServices.SerialController.SerialData.CollectionChanged += CollectionChanged;
 
         }
@@ -99,7 +99,7 @@ namespace ComPlotter
             int barIndex = Properties.Settings.Default.BarsNumber;
             var barsValue = BarList.Items[barIndex] as ComboBoxItem;
             var stringToParse = barsValue.Content.ToString();
-            BarsNumber = Int32.Parse(stringToParse);
+            BarsNumber = Int32.Parse( stringToParse );
 
             if (BarsNumber == 0)
             {

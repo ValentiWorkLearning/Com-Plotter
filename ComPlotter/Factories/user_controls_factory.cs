@@ -1,4 +1,5 @@
 ﻿using ComPlotter.Factories;
+using ComPlotter.Parsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace ComPlotter
     class UserControlsFactory
     {
 
-        public UserControl CreateDialog( object sender , ISerialServicesFacade _facade)
+        public UserControl CreateDialog( object sender , ISerialServicesFacade _facade, IReceivedDataParser _parser)
         {
             switch ( ArgumentsParser.TryParseValue(sender ) )
             {
@@ -25,6 +26,10 @@ namespace ComPlotter
 
                 case ChildWindowType.AboutPage:
                     return new AboutControl();
+
+                case ChildWindowType.TemperaturePressure:
+                    return new PressureTempPlotter( _facade , _parser );
+
                 default:
                     throw new InvalidOperationException();
             }
