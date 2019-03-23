@@ -31,21 +31,21 @@ namespace ComPlotter
 
         public void Connect()
         {
-            if (m_isConfigured)
+            if ( m_isConfigured )
             {
-                Console.WriteLine(m_serialPort.PortName);
-                Console.WriteLine(m_serialPort.BaudRate);
-                Console.WriteLine(m_serialPort.DataBits);
-                Console.WriteLine(m_serialPort.StopBits);
-                Console.WriteLine(m_serialPort.Parity);
+                Console.WriteLine( m_serialPort.PortName );
+                Console.WriteLine( m_serialPort.BaudRate );
+                Console.WriteLine( m_serialPort.DataBits );
+                Console.WriteLine( m_serialPort.StopBits );
+                Console.WriteLine( m_serialPort.Parity );
 
-                if (!m_serialPort.IsOpen)
+                if ( !m_serialPort.IsOpen )
                 {
                     try
                     {
                         m_serialPort.Open();
 
-                        if (m_isFirstThreadLaunch)
+                        if ( m_isFirstThreadLaunch )
                         {
                             m_readerThread.Start();
                             m_isFirstThreadLaunch = false;
@@ -91,7 +91,11 @@ namespace ComPlotter
             ,   string _parity
             )
         {
-            if( string.IsNullOrEmpty( _name ))
+            if(     string.IsNullOrEmpty( _name )
+                ||  string.IsNullOrEmpty( _baudrate )
+                ||  string.IsNullOrEmpty( _bits )
+                ||  string.IsNullOrEmpty(_parity)
+              )
                 throw new InvalidOperationException();
 
             m_serialPort.PortName = _name;
@@ -127,6 +131,7 @@ namespace ComPlotter
                 catch (System.IO.IOException _ex)
                 {
                     m_serialPort.Close();
+
                     Console.WriteLine("Serial may be disconnected");
                     _isSerialValid = false;
 
@@ -158,7 +163,9 @@ namespace ComPlotter
                 catch (System.IO.IOException _ex)
                 {
                     m_serialPort.Close();
+
                     Console.WriteLine("Serial may be disconnected");
+
                     m_isConfigured = false;
                     m_threadGuard.ReleaseMutex();
                     Thread.CurrentThread.Abort();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComPlotter.Parsers
 {
-    class ReceivedDataParser
+    public class ReceivedDataParser
         : IReceivedDataParser
     {
         public float getPressure()
@@ -46,7 +46,7 @@ namespace ComPlotter.Parsers
                 }
                 catch( Exception _ex )
                 {
-                    Console.WriteLine( "Invalid string received:", _toParse );
+                    throw new InvalidOperationException();
                 }
             }
         }

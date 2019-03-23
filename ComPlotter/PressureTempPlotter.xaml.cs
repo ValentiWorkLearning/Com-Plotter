@@ -35,15 +35,22 @@ namespace ComPlotter
         {
             string toProcess = ( ( string )e.NewItems[ 0 ] );
 
-            DataParser.tryParseString( toProcess );
+            try
+            {
+                DataParser.tryParseString( toProcess );
 
-            float pressure = DataParser.getPressure();
-            float temp = DataParser.getTemperature();
-            float humidity = DataParser.getHumidity();
+                float pressure = DataParser.getPressure();
+                float temp = DataParser.getTemperature();
+                float humidity = DataParser.getHumidity();
 
-            UpdateCollectionData( TemperatureValues , temp );
-            UpdateCollectionData( PressureValues, pressure );
-            UpdateCollectionData( HumidityValues, humidity );
+                UpdateCollectionData( TemperatureValues , temp );
+                UpdateCollectionData( PressureValues, pressure );
+                UpdateCollectionData( HumidityValues, humidity );
+            }
+            catch ( InvalidOperationException _ex )
+            {
+                Console.WriteLine( "Invalid string received!" );
+            }
         }
 
         private void InitChartView()

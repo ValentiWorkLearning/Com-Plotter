@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace ComPlotter.Algorithms
 {
-    class DensityDistribution
+    public class DensityDistribution
     {
         public DensityDistribution( int _rangesCount )
         {
             m_rangeTree = new RangeTree<byte, RangeItem>( new RangeItemComparer() );
+
+            if ( _rangesCount == 0 )
+                throw new InvalidOperationException();
 
             int rangeDistance = MaxRightRangeValue / _rangesCount;
             int leftRangeValue = 0;
