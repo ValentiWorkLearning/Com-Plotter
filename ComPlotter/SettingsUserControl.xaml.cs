@@ -76,7 +76,19 @@ namespace ComPlotter
 
         private void Button_RefreshClick(object sender, RoutedEventArgs e)
         {
-            SerialServices.SerialController.RefreshState();
+            try
+            {
+                SerialServices.SerialController.RefreshState();
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show(
+                        Properties.Resources.Error_FailureWithOpenSerialConnection
+                    ,   Properties.Resources.Error_Caption_FailureWithOpenSerialConnection
+                    ,   MessageBoxButton.OK
+                    ,   MessageBoxImage.Error
+                );
+            }
         }
 
         private void ComName_SelectionChanged(object sender, SelectionChangedEventArgs e)

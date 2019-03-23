@@ -17,11 +17,11 @@ namespace ComPlotter
         {
             m_serialPort = new SerialPort
             {
-                ReadTimeout = 500,
-                WriteTimeout = 500
+                ReadTimeout = 1000,
+                WriteTimeout = 1000
             };
 
-            m_readerThread = new Thread( ReadTaskBytestream );
+            m_readerThread = new Thread( () => ReadTaskBytestream( ref m_isConfigured ) );
             m_threadGuard = new Mutex();
             SerialData = new ObservableCollection<byte>();
             SerialDataString = new ObservableCollection<string>();
@@ -102,7 +102,7 @@ namespace ComPlotter
             m_isConfigured = true;
         }
 
-        private void ReadTaskBytestream()
+        private void ReadTaskBytestream( ref bool _isSerialValid )
         {
             while ( true )
             {
@@ -124,10 +124,19 @@ namespace ComPlotter
                 {
                     m_threadGuard.ReleaseMutex();
                 }
+                catch (System.IO.IOException _ex)
+                {
+                    m_serialPort.Close();
+                    Console.WriteLine("Serial may be disconnected");
+                    _isSerialValid = false;
+
+                    m_threadGuard.ReleaseMutex();
+                    Thread.CurrentThread.Abort();
+                }
             }
         }
 
-        private void ReadTaskReadline()
+        private void ReadTaskReadline( ref bool _isSerialValid )
         {
             while (true)
             {
@@ -148,8 +157,11 @@ namespace ComPlotter
                 }
                 catch (System.IO.IOException _ex)
                 {
+                    m_serialPort.Close();
+                    Console.WriteLine("Serial may be disconnected");
+                    m_isConfigured = false;
                     m_threadGuard.ReleaseMutex();
-                    throw new InvalidOperationException();
+                    Thread.CurrentThread.Abort();
                 }
             }
         }
@@ -177,11 +189,11 @@ namespace ComPlotter
 
                     if ( policy == ReceivingPolicy.ByteStream )
                     {
-                        m_readerThread = new Thread( ReadTaskBytestream );
+                        m_readerThread = new Thread( () => ReadTaskBytestream( ref m_isConfigured ) );
                     }
                     else if ( policy == ReceivingPolicy.StringToEndline )
                     {
-                        m_readerThread = new Thread( ReadTaskReadline );
+                        m_readerThread = new Thread( () => ReadTaskReadline( ref m_isConfigured ) );
                     }
 
                     this.m_isFirstThreadLaunch = true;
