@@ -13,7 +13,7 @@ namespace ComPlotter.Algorithms
         {
             m_rangeTree = new RangeTree<byte, RangeItem>( new RangeItemComparer() );
 
-            if ( _rangesCount == 0 )
+            if ( _rangesCount == 0 || _rangesCount > 128 )
                 throw new InvalidOperationException();
 
             int rangeDistance = MaxRightRangeValue / _rangesCount;

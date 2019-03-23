@@ -11,7 +11,7 @@ using System.IO;
 
 namespace ComPlotter
 {
-    class SerialController : ISerialController
+    public class SerialController : ISerialController
     {
         public SerialController()
         {

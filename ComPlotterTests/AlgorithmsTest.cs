@@ -9,10 +9,18 @@ namespace ComPlotterTests
     {
         [TestMethod]
         [ExpectedException( typeof( InvalidOperationException ) ) ]
-        public void Createwith0Intervals()
+        public void CreateWith0Intervals()
         {
             const int rangesCount = 0;
             DensityDistribution densityProvider = new DensityDistribution( rangesCount );
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CreateWithMoreThanPossibleIntervals()
+        {
+            const int rangesCount = 129;
+            DensityDistribution densityProvider = new DensityDistribution(rangesCount);
         }
 
         [TestMethod]
@@ -21,9 +29,9 @@ namespace ComPlotterTests
             const int rangesCount = 8;
             DensityDistribution densityProvider = new DensityDistribution(rangesCount);
 
-            Assert.AreEqual(densityProvider.GetIntervalIndexOfValue(0), 0);
-            Assert.AreEqual(densityProvider.GetIntervalIndexOfValue(32), 1);
-            Assert.AreEqual(densityProvider.GetIntervalIndexOfValue(255), 7);
+            Assert.AreEqual( densityProvider.GetIntervalIndexOfValue( 0 ), 0 );
+            Assert.AreEqual( densityProvider.GetIntervalIndexOfValue( 32 ), 1 );
+            Assert.AreEqual( densityProvider.GetIntervalIndexOfValue( 255 ), 7 );
 
         }
 
@@ -31,11 +39,11 @@ namespace ComPlotterTests
         public void Createwith128Intervals()
         {
             const int rangesCount = 128;
-            DensityDistribution densityProvider = new DensityDistribution(rangesCount);
+            DensityDistribution densityProvider = new DensityDistribution( rangesCount );
 
-            Assert.AreEqual(densityProvider.GetIntervalIndexOfValue(0), 0);
-            Assert.AreEqual(densityProvider.GetIntervalIndexOfValue(2), 1);
-            Assert.AreEqual(densityProvider.GetIntervalIndexOfValue(255), 127);
+            Assert.AreEqual( densityProvider.GetIntervalIndexOfValue( 0 ), 0 );
+            Assert.AreEqual( densityProvider.GetIntervalIndexOfValue( 2 ), 1 );
+            Assert.AreEqual( densityProvider.GetIntervalIndexOfValue( 255 ), 127 );
 
         }
     }

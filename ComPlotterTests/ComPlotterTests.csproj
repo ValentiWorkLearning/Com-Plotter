@@ -52,6 +52,7 @@
     <Compile Include="AlgorithmsTest.cs" />
     <Compile Include="MeteoDataParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerialControllerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
