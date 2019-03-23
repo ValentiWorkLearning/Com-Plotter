@@ -11,5 +11,6 @@ namespace ComPlotter.Parsers
         void tryParseString( string _toParse );
         float getTemperature();
         float getPressure();
+        float getHumidity();
     }
 }

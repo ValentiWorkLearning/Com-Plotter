@@ -16,10 +16,16 @@ void loop()
 {
    
   Serial.print("PRESSURE_BEGIN");
-  Serial.print(11.0f);
+  Serial.print(random(0, 100));
   Serial.print("PRESSURE_END");
+  
   Serial.print("TEMP_BEGIN");
-  Serial.print(random(10, 30));
-  Serial.println("TEMP_END");
-  delay(10);        // delay in between reads for stability
+  Serial.print(random(0, 40));
+  Serial.print("TEMP_END");
+
+  Serial.print("HUMIDITY_BEGIN");
+  Serial.print(random(0, 100));
+  Serial.println("HUMIDITY_END");
+  
+  delay(500);        // delay in between reads for stability
 }

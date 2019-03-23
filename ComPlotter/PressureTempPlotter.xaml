@@ -7,13 +7,42 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="White" >
-        <lvc:CartesianChart ScrollMode="None" Name="DisplayChart" Margin="10,27" HorizontalAlignment="Center" VerticalAlignment="Center" Height="376" Width="721" DisableAnimations="False" 
-                                Hoverable="False">
-            <lvc:CartesianChart.Series>
-            <lvc:ColumnSeries Values="{Binding ChartValues}"
-                        Fill="#00695c"
-                       />
-        </lvc:CartesianChart.Series>
-        </lvc:CartesianChart>
+        <Grid ShowGridLines="False" Margin="5,45,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18*"></ColumnDefinition>
+                <ColumnDefinition Width="61*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Grid.Row="0" Source="pack://application:,,,/Resources/Icons/thermometer.png" VerticalAlignment="Center"/>
+            <Image Grid.Column="0" Grid.Row="1" Source="pack://application:,,,/Resources/Icons/gauge.png" VerticalAlignment="Center" />
+            <Image Grid.Column="0" Grid.Row="2" Source="pack://application:,,,/Resources/Icons/humidity.png" VerticalAlignment="Center"/>
+
+            <lvc:CartesianChart Grid.Column="1" Grid.Row="0" ScrollMode="None" Margin="24,11,-134,11" Name="DisplayChartTemperature" HorizontalAlignment="Center" VerticalAlignment="Center" Height="111" Width="720" DisableAnimations="False" 
+                            Hoverable="False">
+                <lvc:CartesianChart.Series>
+                    <lvc:LineSeries Values="{Binding TemperatureValues}"  Fill="#ffab91" />
+                </lvc:CartesianChart.Series>
+            </lvc:CartesianChart>
+
+            <lvc:CartesianChart  Grid.Column="1" Grid.Row="1" ScrollMode="None" Margin="24,5,-134,4.5" Name="DisplayChartPressure" HorizontalAlignment="Center" VerticalAlignment="Center" Height="124" Width="720" DisableAnimations="False" 
+                            Hoverable="False">
+                <lvc:CartesianChart.Series >
+                    <lvc:LineSeries Values="{Binding PressureValues}"  Fill="#a5d6a7" />
+                </lvc:CartesianChart.Series>
+            </lvc:CartesianChart>
+
+            <lvc:CartesianChart Grid.Column="1" Grid.Row="1" ScrollMode="None" Margin="24,133,-134,-2" x:Name="DisplayChartHumidity" HorizontalAlignment="Center" VerticalAlignment="Center" Height="136" Width="720" DisableAnimations="False" 
+                                Hoverable="False" Grid.RowSpan="2">
+                <lvc:CartesianChart.Series>
+                    <lvc:LineSeries Values="{Binding HumidityValues}"  Fill="#90caf9" />
+                </lvc:CartesianChart.Series>
+            </lvc:CartesianChart>
+
+        </Grid>
     </Grid>
 </UserControl>

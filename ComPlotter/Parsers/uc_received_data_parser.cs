@@ -19,42 +19,63 @@ namespace ComPlotter.Parsers
             return Temperature;
         }
 
+        public float getHumidity()
+        {
+            return Humidity;
+        }
+
         public void tryParseString( string _toParse )
         {
-            int TempIndexBegin;
-            int TempIndexEnd;
-            int PressureIndexBegin;
-            int PressureIndexEnd;
 
             if (
-                    _toParse.Contains( PressureBegin ) && _toParse.Contains( PressureEnd )
-                &&  _toParse.Contains( TempBegin ) && _toParse.Contains( TempEnd ) )
+                    ( _toParse.Contains( PressureBegin ) && _toParse.Contains( PressureEnd ) )
+                &&  ( _toParse.Contains( TempBegin ) && _toParse.Contains( TempEnd ) )
+                &&  ( _toParse.Contains( HumidityBegin ) && _toParse.Contains( HumidityEnd ) )
+            )
             {
-                PressureIndexBegin = _toParse.IndexOf( PressureBegin, 0 ) + PressureBegin.Length;
-                PressureIndexEnd = _toParse.IndexOf( PressureEnd, 0 );
+                try
+                {
+                    var pressureIndexes = getKeyIndexes( _toParse, PressureBegin, PressureEnd );
+                    Pressure = getFloatFromRange( _toParse, pressureIndexes.Item1 , pressureIndexes.Item2 );
 
-                Pressure = float.Parse(
-                        _toParse.Substring( PressureIndexBegin, PressureIndexEnd- PressureIndexBegin )
-                    ,   System.Globalization.CultureInfo.InvariantCulture
-                );
+                    var temperatureIndexes = getKeyIndexes( _toParse, TempBegin, TempEnd );
+                    Temperature = getFloatFromRange( _toParse , temperatureIndexes.Item1, temperatureIndexes.Item2 );
 
-                TempIndexBegin = _toParse.IndexOf( TempBegin , 0 ) + TempBegin.Length;
-                TempIndexEnd = _toParse.IndexOf( TempEnd, 0 );
-
-                Temperature = float.Parse(
-                        _toParse.Substring( TempIndexBegin, TempIndexEnd - TempIndexBegin)
-                    ,   System.Globalization.CultureInfo.InvariantCulture
-                );
-
+                    var humidityIndexes = getKeyIndexes( _toParse, HumidityBegin, HumidityEnd );
+                    Humidity = getFloatFromRange( _toParse, humidityIndexes.Item1, humidityIndexes.Item2 );
+                }
+                catch( Exception _ex )
+                {
+                    Console.WriteLine( "Invalid string received:", _toParse );
+                }
             }
+        }
+
+        ( int,int ) getKeyIndexes( string _dataSource, string _searchKeyBegin, string _searchKeyEnd )
+        {
+            int keyBegin = _dataSource.IndexOf(_searchKeyBegin, 0) + _searchKeyBegin.Length;
+            int keyEnd = _dataSource.IndexOf( _searchKeyEnd, 0 );
+
+            return ( keyBegin, keyEnd );
+        }
+
+        float getFloatFromRange( string _dataSource, int keyBegin, int keyEnd )
+        {
+            return float.Parse(
+                    _dataSource.Substring( keyBegin, keyEnd - keyBegin )
+                ,   System.Globalization.CultureInfo.InvariantCulture
+            );
         }
 
         const string PressureBegin = "PRESSURE_BEGIN";
         const string PressureEnd = "PRESSURE_END";
         const string TempBegin = "TEMP_BEGIN";
         const string TempEnd = "TEMP_END";
+        const string HumidityBegin = "HUMIDITY_BEGIN";
+        const string HumidityEnd = "HUMIDITY_END";
 
         float Pressure;
         float Temperature;
+        float Humidity;
     }
 }

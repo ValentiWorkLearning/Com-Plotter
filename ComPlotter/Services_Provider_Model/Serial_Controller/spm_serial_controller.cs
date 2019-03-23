@@ -7,6 +7,7 @@ using System.IO.Ports;
 using System.Threading;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
 
 namespace ComPlotter
 {
@@ -128,7 +129,7 @@ namespace ComPlotter
 
         private void ReadTaskReadline()
         {
-            while( true )
+            while (true)
             {
                 try
                 {
@@ -136,18 +137,22 @@ namespace ComPlotter
 
                     string toAdd = m_serialPort.ReadLine();
 
-                    SerialDataString.Add( toAdd );
+                    SerialDataString.Add(toAdd);
 
-                    Console.WriteLine( toAdd );
+                    Console.WriteLine(toAdd);
                     m_threadGuard.ReleaseMutex();
                 }
-                catch (System.TimeoutException)
+                catch (System.TimeoutException _ex)
                 {
                     m_threadGuard.ReleaseMutex();
                 }
+                catch (System.IO.IOException _ex)
+                {
+                    m_threadGuard.ReleaseMutex();
+                    throw new InvalidOperationException();
+                }
             }
         }
-
         void IDisposable.Dispose()
         {
             m_threadGuard.WaitOne();
